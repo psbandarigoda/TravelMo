@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".Places">
+
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical" >
+
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-black"
+            android:text="Select a place"
+            android:textColor="@color/colorPrimaryText"
+            android:textSize="24sp"
+            android:textAlignment="center"
+            android:layout_marginTop="13dp"/>
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/colorDivider" />
+
+
+        <ImageView
+            android:id="@+id/kandy"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/kandy"
+            app:srcCompat="@color/colorAccent"
+            tools:srcCompat="@drawable/kandy" />
+
+
+        <Button
+            android:id="@+id/kandy1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="150dp"
+            android:layout_marginTop="-140dp"
+            android:background="@color/colorPrimaryText"
+
+            android:onClick="@string/kandy"
+            android:text="@string/kandy"
+            android:textColor="@color/colorText" />
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:layout_marginTop="70dp"
+            android:background="@color/colorDivider" />
+
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/galle"
+            app:srcCompat="@color/colorAccent"
+            tools:srcCompat="@drawable/galle" />
+
+        <Button
+            android:id="@+id/galle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="150dp"
+            android:layout_marginTop="-140dp"
+            android:background="@color/colorPrimaryText"
+
+            android:onClick="@string/galle"
+            android:text="@string/galle"
+            android:textColor="@color/colorText" />
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:layout_marginTop="70dp"
+            android:background="@color/colorDivider" />
+
+        <ImageView
+            android:id="@+id/rathna"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_gravity="center"
+            android:scaleType="centerCrop"
+            android:src="@drawable/rathna"
+            app:srcCompat="@color/colorAccent"
+            tools:srcCompat="@drawable/rathna" />
+
+        <Button
+            android:id="@+id/button3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="145dp"
+            android:layout_marginTop="-140dp"
+            android:background="@color/colorPrimaryText"
+
+            android:onClick="@string/rathna"
+            android:text="@string/rathna"
+            android:textColor="@color/colorText" />
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:layout_marginTop="70dp"
+            android:background="@color/colorDivider" />
+
+        <ImageView
+            android:id="@+id/imageView6"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_gravity="center"
+            android:scaleType="centerCrop"
+            android:src="@drawable/nuwara"
+            app:srcCompat="@color/colorAccent"
+            tools:srcCompat="@drawable/nuwara" />
+
+        <Button
+            android:id="@+id/search2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="140dp"
+            android:layout_marginTop="-140dp"
+            android:background="@color/colorPrimaryText"
+
+            android:onClick="@string/nuwara"
+            android:text="@string/nuwara"
+            android:textColor="@color/colorText" />
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:layout_marginTop="70dp"
+            android:background="@color/colorDivider" />
+
+        <ImageView
+            android:id="@+id/imageView7"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_gravity="center"
+            android:scaleType="centerCrop"
+            android:src="@drawable/anura"
+            app:srcCompat="@color/colorAccent"
+            tools:srcCompat="@drawable/anura" />
+
+        <Button
+            android:id="@+id/button5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="140dp"
+            android:layout_marginTop="-140dp"
+            android:background="@color/colorPrimaryText"
+
+            android:onClick="@string/anura"
+            android:text="@string/anura"
+            android:textColor="@color/colorText" />
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:layout_marginTop="70dp"
+            android:background="@color/colorDivider" />
+
+        <ImageView
+            android:id="@+id/imageView8"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_gravity="center"
+            android:scaleType="centerCrop"
+            android:src="@drawable/jaffna"
+            app:srcCompat="@color/colorAccent"
+            tools:srcCompat="@drawable/jaffna" />
+
+        <Button
+            android:id="@+id/button6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="150dp"
+            android:layout_marginTop="-120dp"
+            android:background="@color/colorPrimaryText"
+
+
+            android:onClick="@string/jafna"
+            android:text="@string/jafna"
+            android:textColor="@color/colorText" />
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:layout_marginTop="90dp"
+            android:background="@color/colorDivider" />
+
+
+    </LinearLayout>
+</ScrollView>

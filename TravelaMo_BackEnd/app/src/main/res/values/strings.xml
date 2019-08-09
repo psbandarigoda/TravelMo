@@ -1,0 +1,91 @@
+<resources>
+    <string name="app_name">Travelapp</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+    <string name="menu_tools">Tools</string>
+    <string name="menu_share">Share</string>
+    <string name="menu_send">Send</string>
+    <string name="kandy">KANDY</string>
+    <string name="galle">GALLE</string>
+    <string name="jaffna">JAFFNA</string>
+    <string name="anura">ANURADHAPURA</string>
+    <string name="rathnapura">RATHNAPURA</string>
+    <string name="nuwara">NUWARA ELIYA</string>
+    <string name="addplace">ADD PLACE</string>
+    <string name="hotel">HOTEL</string>
+    <string name="guide">GUIDE</string>
+    <string name="place">ADD</string>
+    <string name="name"></string>
+    <string name="age"></string>
+    <string name="phone"></string>
+    <string name="email"></string>
+    <string name="description"></string>
+    <string name="vehicle"></string>
+    <string name="addguide">ADD</string>
+    <string name="update">update</string>
+    <string name="delete">delete</string>
+    <string name="guide_name">Guide name</string>
+    <string name="desc">Description</string>
+    <string name="placename">Place</string>
+    <string name="hotel_list">Hotels List</string>
+    <string name="all_list">Hotels and Guides List</string>
+    <string name="guide_list">Guides List</string>
+
+    <string name="topic_guide">Add a Guide</string>
+    <string name="gtxt_name">Full Name</string>
+    <string name="gtxt_phone">Contact Number</string>
+    <string name="gtxt_email">Email</string>
+    <string name="gtxt_age">Age</string>
+    <string name="gtxt_desc">Description</string>
+    <string name="gtxt_vehicle">Vehicle Type</string>
+
+    <string name="topic_hotel">Add a Hotel</string>
+    <string name="htxt_name">Hotel Name</string>
+    <string name="htxt_Add">Address</string>
+    <string name="htxt_phone">Contact Number</string>
+    <string name="htxt_Email">Email</string>
+    <string name="htxt_Star">Star Rating</string>
+    <string name="htxt_desc">Description</string>
+    <string name="hname"></string>
+    <string name="haddress"></string>
+    <string name="hphone"></string>
+    <string name="hemail"></string>
+    <string name="hstar"></string>
+    <string name="hdesc"></string>
+
+    <string name="select">Select a Place</string>
+
+    <string name="title_activity_list_all">list_all</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="view_all">View All</string>
+    <string name="title_activity_hotel_guide_list">hotelGuideList</string>
+
+    <!-- Hotel Names -->
+    <string name="earl_regency_kandy">Earls Regency Kandy</string>
+    <string name="ozo_kandy">Ozo Kandy</string>
+    <string name="queens_kandy">Queens Hotel</string>
+
+
+    <string-array name="vehicle_type">
+        <item>KDH</item>
+        <item>Hiace</item>
+        <item>Dolphin</item>
+        <item>Maco-Polo</item>
+        <item>Leyland Bus</item>
+        <item>Vanatte</item>
+    </string-array>
+
+
+
+
+</resources>

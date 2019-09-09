@@ -126,15 +126,15 @@
         android:textColor="@color/colorText" />
 
     <Button
-        android:id="@+id/btnconfirm2"
+        android:id="@+id/next"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:background="@drawable/button_shape"
-        android:onClick="@string/confirm"
-        android:text="confirm"
+        android:onClick="@string/next"
+        android:text="next"
         android:textColor="@color/colorText"
-        tools:text="@string/confirm" />
+        tools:text="@string/next" />
 
     <TextView android:id="@+id/text114"
         android:layout_width="wrap_content"

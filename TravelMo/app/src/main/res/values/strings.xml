@@ -104,11 +104,11 @@
     <string name="hottel">Hottel</string>
     <string name="guide">Guide</string>
     <string name="guideName">Guide Name</string>
-    <string name="next">Next</string>
+    <string name="conform">Conform</string>
     <string name="guide_reservation">Guide Reservations</string>
     <string name="edit">Edit</string>
     <string name="Cancel">Cancel</string>
-    <string name="confirm">Confirm</string>
+    <string name="next">Next</string>
 
 
     <string name="search">Search</string>

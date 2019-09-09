@@ -14,6 +14,8 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import androidx.drawerlayout.widget.DrawerLayout;
 
@@ -23,7 +25,9 @@ import androidx.appcompat.widget.Toolbar;
 import android.view.Menu;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +36,10 @@ public class GuideBooking extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
 
-    Button next2;
+    Button conform;
+    EditText Text_Name,Text_Email,Text_Days,Text_Phone;
+    UserDetailForGuideReserv detailForGuideReserv;
+    DatabaseReference dbRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,9 +68,7 @@ public class GuideBooking extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
 
-        next2 = findViewById(R.id.next);
-
-        Spinner spinner = (Spinner) findViewById(R.id.spinner5);
+        Spinner spinner = (Spinner) findViewById(R.id.spinnerVehicle);
 
         List<String> categories = new ArrayList<String>();
         categories.add("Hiace");
@@ -75,6 +80,32 @@ public class GuideBooking extends AppCompatActivity {
         ArrayAdapter<String> dataAdaptor = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,categories);
         dataAdaptor.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(dataAdaptor);
+
+        Text_Name = findViewById(R.id.editTextName);
+        Text_Email = findViewById(R.id.editTextEmail);
+        Text_Days = findViewById(R.id.editTextDays);
+        Text_Phone = findViewById(R.id.editTextPhone);
+
+        conform = findViewById(R.id.conform);
+
+        detailForGuideReserv = new UserDetailForGuideReserv();
+
+        conform.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dbRef = FirebaseDatabase.getInstance().getReference().child("GuideReceiveUser");
+                detailForGuideReserv.setName(Text_Name.getText().toString().trim());
+                detailForGuideReserv.setEmail(Text_Email.getText().toString().trim());
+                detailForGuideReserv.setDays(Text_Days.getText().toString().trim());
+                detailForGuideReserv.setPhoneNumber(Integer.parseInt(Text_Phone.getText().toString().trim()));
+
+                dbRef.child("IT001").setValue(detailForGuideReserv);
+                Toast.makeText(getApplicationContext(),"Adding Success",Toast.LENGTH_LONG).show();
+
+                Intent intent = new Intent(GuideBooking.this,GuideBookingConfirm.class);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -91,16 +122,16 @@ public class GuideBooking extends AppCompatActivity {
                 || super.onSupportNavigateUp();
     }
 
-    @Override
-    protected void onResume(){
-        super.onResume();
-
-        next2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(GuideBooking.this,GuideBookingConfirm.class);
-                startActivity(intent);
-            }
-        });
-    }
+//    @Override
+//    protected void onResume(){
+//        super.onResume();
+//
+//        conform.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(GuideBooking.this,GuideBookingConfirm.class);
+//                startActivity(intent);
+//            }
+//        });
+//    }
 }

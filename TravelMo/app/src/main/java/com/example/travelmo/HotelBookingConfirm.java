@@ -19,7 +19,7 @@ public class HotelBookingConfirm extends AppCompatActivity {
         setContentView(R.layout.activity_hotel_booking_confirm);
 
         edit = findViewById(R.id.btnedit2);
-        confirm = findViewById(R.id.btnconfirm2);
+        confirm = findViewById(R.id.next);
         cancel = findViewById(R.id.cancel);
     }
 

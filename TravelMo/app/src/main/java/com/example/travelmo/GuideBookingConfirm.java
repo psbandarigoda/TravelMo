@@ -19,7 +19,7 @@ public class GuideBookingConfirm extends AppCompatActivity {
         setContentView(R.layout.activity_guide_booking_confirm);
 
         editDtl = findViewById(R.id.btnedit2);
-        confirmDtl = findViewById(R.id.btnconfirm2);
+        confirmDtl = findViewById(R.id.next);
         cancel = findViewById(R.id.cancel112);
     }
 

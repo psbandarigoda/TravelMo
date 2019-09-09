@@ -8,7 +8,7 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/textName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="30dp"
@@ -17,7 +17,7 @@
         android:textColor="@color/colorPrimaryText" />
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/editTextName"
         android:layout_width="281dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="100dp"
@@ -26,7 +26,7 @@
         android:inputType="textPersonName" />
 
     <TextView
-        android:id="@+id/textView6"
+        android:id="@+id/textEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="30dp"
@@ -35,7 +35,7 @@
         android:textColor="@color/colorPrimaryText" />
 
     <EditText
-        android:id="@+id/editText3"
+        android:id="@+id/editTextEmail"
         android:layout_width="282dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="100dp"
@@ -44,7 +44,7 @@
         android:inputType="textPersonName" />
 
     <TextView
-        android:id="@+id/textView8"
+        android:id="@+id/textdays"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="30dp"
@@ -53,7 +53,7 @@
         android:textColor="@color/colorPrimaryText" />
 
     <EditText
-        android:id="@+id/editText4"
+        android:id="@+id/editTextDays"
         android:layout_width="278dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="100dp"
@@ -62,7 +62,7 @@
         android:inputType="textPersonName" />
 
     <TextView
-        android:id="@+id/textView9"
+        android:id="@+id/textVehicle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="30dp"
@@ -72,7 +72,7 @@
 
 
     <Spinner
-        android:id="@+id/spinner5"
+        android:id="@+id/spinnerVehicle"
         android:layout_width="150dp"
         android:layout_height="43dp"
         android:layout_marginLeft="130dp"
@@ -82,7 +82,7 @@
 
 
     <TextView
-        android:id="@+id/textView11"
+        android:id="@+id/textPhone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="30dp"
@@ -91,7 +91,7 @@
         android:textColor="@color/colorPrimaryText" />
 
     <EditText
-        android:id="@+id/editText6"
+        android:id="@+id/editTextPhone"
         android:layout_width="254dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="120dp"
@@ -100,14 +100,14 @@
         android:inputType="textPersonName" />
 
     <Button
-        android:id="@+id/next"
+        android:id="@+id/conform"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="150dp"
         android:layout_marginTop="100dp"
         android:background="@drawable/button_shape"
-        android:onClick="@string/next"
-        android:text="@string/next" />
+        android:onClick="@string/conform"
+        android:text="@string/conform" />
 
     <TextView
         android:id="@+id/textView12"

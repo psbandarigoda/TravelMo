@@ -115,7 +115,7 @@ public class HotelBooking extends AppCompatActivity {
                         hotel.setPhone(Integer.parseInt(phone.getText().toString().trim()));
 
                         dbref.push().setValue(hotel);
-                        Toast.makeText(getApplicationContext(),"Hotel Booked",Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(),"Hotel Booked..",Toast.LENGTH_LONG).show();
                         clearControls();
 
                         Intent intent = new Intent(HotelBooking.this,HotelBookingConfirm.class);

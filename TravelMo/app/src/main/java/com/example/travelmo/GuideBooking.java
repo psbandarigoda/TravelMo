@@ -6,6 +6,7 @@ import android.os.Bundle;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
+import android.text.TextUtils;
 import android.view.View;
 
 import androidx.navigation.NavController;
@@ -37,7 +38,7 @@ public class GuideBooking extends AppCompatActivity {
     private AppBarConfiguration mAppBarConfiguration;
 
     Button conform;
-    EditText Text_Name,Text_Email,Text_Days,Text_Phone;
+    EditText Text_Name, Text_Email, Text_Days, Text_Phone;
     UserDetailForGuideReserv detailForGuideReserv;
     DatabaseReference dbRef;
 
@@ -77,7 +78,7 @@ public class GuideBooking extends AppCompatActivity {
         categories.add("Vanatte");
         categories.add("Dolphin");
         categories.add("Laylend Bus");
-        ArrayAdapter<String> dataAdaptor = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,categories);
+        ArrayAdapter<String> dataAdaptor = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, categories);
         dataAdaptor.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(dataAdaptor);
 
@@ -90,22 +91,22 @@ public class GuideBooking extends AppCompatActivity {
 
         detailForGuideReserv = new UserDetailForGuideReserv();
 
-        conform.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dbRef = FirebaseDatabase.getInstance().getReference().child("GuideReceiveUser");
-                detailForGuideReserv.setName(Text_Name.getText().toString().trim());
-                detailForGuideReserv.setEmail(Text_Email.getText().toString().trim());
-                detailForGuideReserv.setDays(Text_Days.getText().toString().trim());
-                detailForGuideReserv.setPhoneNumber(Integer.parseInt(Text_Phone.getText().toString().trim()));
-
-                dbRef.child("IT001").setValue(detailForGuideReserv);
-                Toast.makeText(getApplicationContext(),"Adding Success",Toast.LENGTH_LONG).show();
-
-                Intent intent = new Intent(GuideBooking.this,GuideBookingConfirm.class);
-                startActivity(intent);
-            }
-        });
+//        conform.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                dbRef = FirebaseDatabase.getInstance().getReference().child("GuideReceiveUser");
+//                detailForGuideReserv.setName(Text_Name.getText().toString().trim());
+//                detailForGuideReserv.setEmail(Text_Email.getText().toString().trim());
+//                detailForGuideReserv.setDays(Text_Days.getText().toString().trim());
+//                detailForGuideReserv.setPhoneNumber(Integer.parseInt(Text_Phone.getText().toString().trim()));
+//
+//                dbRef.child("IT001").setValue(detailForGuideReserv);
+//                Toast.makeText(getApplicationContext(),"Adding Success",Toast.LENGTH_LONG).show();
+//
+//                Intent intent = new Intent(GuideBooking.this,GuideBookingConfirm.class);
+//                startActivity(intent);
+//            }
+//        });
     }
 
     @Override
@@ -122,16 +123,51 @@ public class GuideBooking extends AppCompatActivity {
                 || super.onSupportNavigateUp();
     }
 
-//    @Override
-//    protected void onResume(){
-//        super.onResume();
-//
-//        conform.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent(GuideBooking.this,GuideBookingConfirm.class);
-//                startActivity(intent);
-//            }
-//        });
-//    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        conform.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dbRef = FirebaseDatabase.getInstance().getReference().child("GuideReceiveUser");
+                try {
+                    if (TextUtils.isEmpty(Text_Name.getText().toString()))
+                        Toast.makeText(getApplicationContext(), "Please Enter Name", Toast.LENGTH_LONG).show();
+                    else if (TextUtils.isEmpty(Text_Email.getText().toString()))
+                        Toast.makeText(getApplicationContext(), "Please Enter E-Mail", Toast.LENGTH_LONG).show();
+                    else if (TextUtils.isEmpty(Text_Days.getText().toString()))
+                        Toast.makeText(getApplicationContext(), "Please Enter No Of Days", Toast.LENGTH_LONG).show();
+                    else if (TextUtils.isEmpty(Text_Phone.getText().toString()))
+                        Toast.makeText(getApplicationContext(), "Please Enter Phone No", Toast.LENGTH_LONG).show();
+                    else {
+                        detailForGuideReserv.setName(Text_Name.getText().toString().trim());
+                        detailForGuideReserv.setEmail(Text_Email.getText().toString().trim());
+                        detailForGuideReserv.setDays(Text_Days.getText().toString().trim());
+                        detailForGuideReserv.setVehicle(Text_Phone.getText().toString().trim());
+                        //detailForGuideReserv.setPhoneNumber(Integer.parseInt(phone.getText().toString().trim()));
+
+                        dbRef.push().setValue(detailForGuideReserv);
+                        Toast.makeText(getApplicationContext(), "Guide Booked..", Toast.LENGTH_LONG).show();
+                        clearControls();
+
+                        Intent intent = new Intent(GuideBooking.this, GuideBookingConfirm.class);
+                        startActivity(intent);
+                    }
+
+                } catch (NumberFormatException e) {
+                    Toast.makeText(getApplicationContext(), "Invalid Contact Number", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+    }
+
+    private void clearControls() {
+        Text_Name.setText("");
+        Text_Email.setText("");
+        Text_Days.setText("");
+        //room.setText("");
+        Text_Phone.setText("");
+    }
+
 }

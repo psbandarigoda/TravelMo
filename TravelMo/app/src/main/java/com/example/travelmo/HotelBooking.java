@@ -6,6 +6,7 @@ import android.os.Bundle;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
+import android.text.TextUtils;
 import android.view.View;
 
 import androidx.navigation.NavController;
@@ -14,6 +15,8 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import androidx.drawerlayout.widget.DrawerLayout;
 
@@ -22,12 +25,17 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.view.Menu;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
 public class HotelBooking extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
 
     Button next1;
+    DatabaseReference dbref;
+    UserDetailForHotelReserv hotel;
+    EditText name,email,days,room,phone;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +65,13 @@ public class HotelBooking extends AppCompatActivity {
         NavigationUI.setupWithNavController(navigationView, navController);
 
         next1 = findViewById(R.id.save);
+        name = findViewById(R.id.name);
+        email = findViewById(R.id.email);
+        phone = findViewById(R.id.phone);
+        days = findViewById(R.id.days);
+        room = findViewById(R.id.rooms);
+
+        hotel = new UserDetailForHotelReserv();
     }
 
     @Override
@@ -80,9 +95,45 @@ public class HotelBooking extends AppCompatActivity {
         next1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(HotelBooking.this,HotelBookingConfirm.class);
-                startActivity(intent);
+                dbref = FirebaseDatabase.getInstance().getReference().child("HotelUser");
+                try{
+                    if(TextUtils.isEmpty(name.getText().toString()))
+                        Toast.makeText(getApplicationContext(),"Please Enter Name",Toast.LENGTH_LONG).show();
+                    else if(TextUtils.isEmpty(email.getText().toString()))
+                        Toast.makeText(getApplicationContext(),"Please Enter E-Mail",Toast.LENGTH_LONG).show();
+                    else if(TextUtils.isEmpty(room.getText().toString()))
+                        Toast.makeText(getApplicationContext(),"Please Enter No Of Rooms",Toast.LENGTH_LONG).show();
+                    else if(TextUtils.isEmpty(phone.getText().toString()))
+                        Toast.makeText(getApplicationContext(),"Please Enter Phone No",Toast.LENGTH_LONG).show();
+                    else if(TextUtils.isEmpty(days.getText().toString()))
+                        Toast.makeText(getApplicationContext(),"Please Enter Days",Toast.LENGTH_LONG).show();
+                    else{
+                        hotel.setName(name.getText().toString().trim());
+                        hotel.setEmail(email.getText().toString().trim());
+                        hotel.setDays(days.getText().toString().trim());
+                        hotel.setRooms(room.getText().toString().trim());
+                        hotel.setPhone(Integer.parseInt(phone.getText().toString().trim()));
+
+                        dbref.push().setValue(hotel);
+                        Toast.makeText(getApplicationContext(),"Hotel Booked",Toast.LENGTH_LONG).show();
+                        clearControls();
+
+                        Intent intent = new Intent(HotelBooking.this,HotelBookingConfirm.class);
+                        startActivity(intent);
+                    }
+
+                }catch (NumberFormatException e){
+                    Toast.makeText(getApplicationContext(),"Invalid Contact Number",Toast.LENGTH_LONG).show();
+                }
             }
         });
+    }
+
+    private void clearControls(){
+        name.setText("");
+        email.setText("");
+        days.setText("");
+        room.setText("");
+        phone.setText("");
     }
 }

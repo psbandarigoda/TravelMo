@@ -45,9 +45,6 @@ public class GuideBookingConfirm extends AppCompatActivity {
         String message = intent.getStringExtra("user");
 
 
-        cancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
                 dbRef = FirebaseDatabase.getInstance().getReference().child("GuideReceiveUser").child("0001");
 
@@ -77,8 +74,7 @@ public class GuideBookingConfirm extends AppCompatActivity {
                 });
 
             }
-        });
-    }
+
 
     @Override
     protected void onResume(){

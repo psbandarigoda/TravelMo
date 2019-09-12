@@ -41,12 +41,15 @@ public class GuideBookingConfirm extends AppCompatActivity {
         txt_vehicle=findViewById(R.id.textViewVehicle);
         txt_phoneNumber=findViewById(R.id.textViewPhoneNum);
 
+        final Intent intent = getIntent();
+        String message = intent.getStringExtra("user");
+
 
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                System.out.println("GGGGGG");
-                dbRef = FirebaseDatabase.getInstance().getReference().child("GuideReceiveUser").child("LoXujgVaRlFdPBImP3n");
+
+                dbRef = FirebaseDatabase.getInstance().getReference().child("GuideReceiveUser").child("0001");
 
                 dbRef.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override

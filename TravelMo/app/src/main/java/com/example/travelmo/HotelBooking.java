@@ -36,7 +36,7 @@ public class HotelBooking extends AppCompatActivity {
     DatabaseReference dbref;
     UserDetailForHotelReserv hotel;
     EditText name,email,days,room,phone;
-
+    String count = "100001";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -95,7 +95,7 @@ public class HotelBooking extends AppCompatActivity {
         next1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                dbref = FirebaseDatabase.getInstance().getReference().child("HotelUser");
+                dbref = FirebaseDatabase.getInstance().getReference().child("HotelUser").child(returnid());
                 try{
                     if(TextUtils.isEmpty(name.getText().toString()))
                         Toast.makeText(getApplicationContext(),"Please Enter Name",Toast.LENGTH_LONG).show();
@@ -118,7 +118,11 @@ public class HotelBooking extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(),"Hotel Booked..",Toast.LENGTH_LONG).show();
                         clearControls();
 
+                        String val = count;
+
+
                         Intent intent = new Intent(HotelBooking.this,HotelBookingConfirm.class);
+                        intent.putExtra("userObject",val);
                         startActivity(intent);
                     }
 
@@ -135,5 +139,11 @@ public class HotelBooking extends AppCompatActivity {
         days.setText("");
         room.setText("");
         phone.setText("");
+    }
+    public String returnid(){
+
+        count = String.valueOf(Integer.valueOf(count)+1);
+
+        return count;
     }
 }

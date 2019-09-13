@@ -28,12 +28,12 @@
         android:textColor="@color/colorPrimaryText" />
 
     <TextView
-        android:id="@+id/textView18"
+        android:id="@+id/name1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="100dp"
         android:layout_marginTop="-20dp"
-        android:text="Name of user" />
+        android:text=" " />
 
     <TextView
         android:id="@+id/textView6"
@@ -45,12 +45,12 @@
         android:textColor="@color/colorPrimaryText" />
 
     <TextView
-        android:id="@+id/textView19"
+        android:id="@+id/email1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="100dp"
         android:layout_marginTop="-20dp"
-        android:text="user@gmail.com" />
+        android:text=" " />
 
     <TextView
         android:id="@+id/textView8"
@@ -62,12 +62,12 @@
         android:textColor="@color/colorPrimaryText" />
 
     <TextView
-        android:id="@+id/textView20"
+        android:id="@+id/days1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="100dp"
         android:layout_marginTop="-20dp"
-        android:text="No of Days" />
+        android:text=" " />
 
     <TextView
         android:id="@+id/textView9"
@@ -79,12 +79,12 @@
         android:textColor="@color/colorPrimaryText" />
 
     <TextView
-        android:id="@+id/textView21"
+        android:id="@+id/room1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="100dp"
         android:layout_marginTop="-20dp"
-        android:text="No of Rooms" />
+        android:text=" " />
 
     <TextView
         android:id="@+id/textView11"
@@ -96,12 +96,12 @@
         android:textColor="@color/colorPrimaryText" />
 
     <TextView
-        android:id="@+id/textView22"
+        android:id="@+id/phone1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="130dp"
         android:layout_marginTop="-20dp"
-        android:text="(Optional)" />
+        android:text=" " />
 
     <Button
         android:id="@+id/btnedit2"

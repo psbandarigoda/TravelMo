@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "665394461802",
+    "firebase_url": "https://travelamobackend.firebaseio.com",
+    "project_id": "travelamobackend",
+    "storage_bucket": "travelamobackend.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:665394461802:android:eaebf2c30a85680e5b5e13",
+        "android_client_info": {
+          "package_name": "com.example.travelapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "665394461802-huguiu1f6kp9r49ea7tp4uak1i6ar8cm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.travelapp",
+            "certificate_hash": "5b7deabd35d422e42c3c2b29804fe5ab672b9042"
+          }
+        },
+        {
+          "client_id": "665394461802-kmk9tl3jag38uhqg87g080q0un3v4kls.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAqsPHlmvpJYZ9Z67FYCHAGUEKCbDU5Jpo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "665394461802-kmk9tl3jag38uhqg87g080q0un3v4kls.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "843007015024",
+    "firebase_url": "https://booklistactivity.firebaseio.com",
+    "project_id": "booklistactivity",
+    "storage_bucket": "booklistactivity.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:843007015024:android:d3073975cae18f7a505cb5",
+        "android_client_info": {
+          "package_name": "com.example.booklistactivity"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "843007015024-olnmckcokdeo0eic8odqdvpnthlvg8uk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.booklistactivity",
+            "certificate_hash": "5b7deabd35d422e42c3c2b29804fe5ab672b9042"
+          }
+        },
+        {
+          "client_id": "843007015024-6me6s0mp6ladokgij3sseqe9s122lo7r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC_CCj0F1xdbAqmKXayBtGDJQYpfQDRrVM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "843007015024-6me6s0mp6ladokgij3sseqe9s122lo7r.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

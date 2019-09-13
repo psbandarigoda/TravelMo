@@ -17,26 +17,8 @@
         android:textColor="@color/colorPrimaryText" />
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/uname"
         android:layout_width="281dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="100dp"
-        android:layout_marginTop="-30dp"
-        android:ems="10"
-        android:inputType="textPersonName" />
-
-    <TextView
-        android:id="@+id/textView6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="30dp"
-        android:text="E-Mail"
-        android:textColor="@color/colorPrimaryText" />
-
-    <EditText
-        android:id="@+id/editText3"
-        android:layout_width="282dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="100dp"
         android:layout_marginTop="-30dp"
@@ -53,7 +35,7 @@
         android:textColor="@color/colorPrimaryText" />
 
     <EditText
-        android:id="@+id/editText4"
+        android:id="@+id/udays"
         android:layout_width="278dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="100dp"
@@ -71,7 +53,7 @@
         android:textColor="@color/colorPrimaryText" />
 
     <EditText
-        android:id="@+id/editText5"
+        android:id="@+id/urooms"
         android:layout_width="277dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="100dp"
@@ -89,7 +71,7 @@
         android:textColor="@color/colorPrimaryText" />
 
     <EditText
-        android:id="@+id/editText6"
+        android:id="@+id/uphone"
         android:layout_width="254dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="120dp"
@@ -118,6 +100,17 @@
         android:text=" Edit Your Details"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="25dp" />
+
+    <Button
+        android:id="@+id/cans"
+        android:layout_width="wrap_content"
+        android:layout_height="38dp"
+        android:layout_marginLeft="150dp"
+        android:layout_marginTop="500dp"
+        android:background="@drawable/button_shape"
+
+        android:text="@string/conform"
+        android:textColor="@color/colorText" />
 
 
 </LinearLayout>

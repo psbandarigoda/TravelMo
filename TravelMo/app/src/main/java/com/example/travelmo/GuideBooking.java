@@ -41,6 +41,7 @@ public class GuideBooking extends AppCompatActivity {
     EditText Text_Name, Text_Email, Text_Days, Text_Phone;
     UserDetailForGuideReserv detailForGuideReserv;
     DatabaseReference dbRef;
+    String count = "111111";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -130,7 +131,7 @@ public class GuideBooking extends AppCompatActivity {
         conform.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                dbRef = FirebaseDatabase.getInstance().getReference().child("GuideReceiveUser");
+                dbRef = FirebaseDatabase.getInstance().getReference().child("GuideReceiveUser").child(returnid());
                 try {
                     if (TextUtils.isEmpty(Text_Name.getText().toString()))
                         Toast.makeText(getApplicationContext(), "Please Enter Name", Toast.LENGTH_LONG).show();
@@ -151,7 +152,10 @@ public class GuideBooking extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(), "Guide Booked..", Toast.LENGTH_LONG).show();
                         clearControls();
 
+                        String val = count;
+
                         Intent intent = new Intent(GuideBooking.this, GuideBookingConfirm.class);
+                        intent.putExtra("userObject", val);
                         startActivity(intent);
                     }
 
@@ -168,6 +172,13 @@ public class GuideBooking extends AppCompatActivity {
         Text_Days.setText("");
         //room.setText("");
         Text_Phone.setText("");
+    }
+
+    public String returnid() {
+
+        count = String.valueOf(Integer.valueOf(count) + 1);
+
+        return count;
     }
 
 }

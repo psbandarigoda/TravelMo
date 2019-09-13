@@ -6,7 +6,9 @@ import android.os.Bundle;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
+import android.os.Parcelable;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 
 import androidx.navigation.NavController;
@@ -35,8 +37,10 @@ public class HotelBooking extends AppCompatActivity {
     Button next1;
     DatabaseReference dbref;
     UserDetailForHotelReserv hotel;
-    EditText name,email,days,room,phone;
+    EditText name, email, days, room, phone;
     String count = "100001";
+    String key,plc,x;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,6 +76,8 @@ public class HotelBooking extends AppCompatActivity {
         room = findViewById(R.id.rooms);
 
         hotel = new UserDetailForHotelReserv();
+        Intent place = getIntent();
+        plc = place.getStringExtra("place");
     }
 
     @Override
@@ -89,60 +95,67 @@ public class HotelBooking extends AppCompatActivity {
     }
 
     @Override
-    protected void onResume(){
+    protected void onResume() {
         super.onResume();
 
         next1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                dbref = FirebaseDatabase.getInstance().getReference().child("HotelUser").child(returnid());
-                try{
-                    if(TextUtils.isEmpty(name.getText().toString()))
-                        Toast.makeText(getApplicationContext(),"Please Enter Name",Toast.LENGTH_LONG).show();
-                    else if(TextUtils.isEmpty(email.getText().toString()))
-                        Toast.makeText(getApplicationContext(),"Please Enter E-Mail",Toast.LENGTH_LONG).show();
-                    else if(TextUtils.isEmpty(room.getText().toString()))
-                        Toast.makeText(getApplicationContext(),"Please Enter No Of Rooms",Toast.LENGTH_LONG).show();
-                    else if(TextUtils.isEmpty(phone.getText().toString()))
-                        Toast.makeText(getApplicationContext(),"Please Enter Phone No",Toast.LENGTH_LONG).show();
-                    else if(TextUtils.isEmpty(days.getText().toString()))
-                        Toast.makeText(getApplicationContext(),"Please Enter Days",Toast.LENGTH_LONG).show();
-                    else{
+
+                dbref = FirebaseDatabase.getInstance().getReference().child(plc).child("HotelUser");
+                try {
+                    if (TextUtils.isEmpty(name.getText().toString()))
+                        Toast.makeText(getApplicationContext(), "Please Enter Name", Toast.LENGTH_LONG).show();
+                    else if (TextUtils.isEmpty(email.getText().toString()))
+                        Toast.makeText(getApplicationContext(), "Please Enter E-Mail", Toast.LENGTH_LONG).show();
+                    else if (TextUtils.isEmpty(room.getText().toString()))
+                        Toast.makeText(getApplicationContext(), "Please Enter No Of Rooms", Toast.LENGTH_LONG).show();
+                    else if (TextUtils.isEmpty(phone.getText().toString()))
+                        Toast.makeText(getApplicationContext(), "Please Enter Phone No", Toast.LENGTH_LONG).show();
+                    else if (TextUtils.isEmpty(days.getText().toString()))
+                        Toast.makeText(getApplicationContext(), "Please Enter Days", Toast.LENGTH_LONG).show();
+                    else {
                         hotel.setName(name.getText().toString().trim());
                         hotel.setEmail(email.getText().toString().trim());
                         hotel.setDays(days.getText().toString().trim());
                         hotel.setRooms(room.getText().toString().trim());
                         hotel.setPhone(Integer.parseInt(phone.getText().toString().trim()));
 
-                        dbref.push().setValue(hotel);
-                        Toast.makeText(getApplicationContext(),"Hotel Booked..",Toast.LENGTH_LONG).show();
+                          x = email.getText().toString().trim();
+                        dbref.child(x).setValue(hotel);
+
+                        Toast.makeText(getApplicationContext(), "Hotel Booked..", Toast.LENGTH_LONG).show();
                         clearControls();
 
                         String val = count;
+//                        key = dbref.child(val).push().getKey();
+//                        Log.i("Value is ...........",key);
+//                        System.out.print(key);
 
-
-                        Intent intent = new Intent(HotelBooking.this,HotelBookingConfirm.class);
-                        intent.putExtra("userObject",val);
+                        Intent intent = new Intent(HotelBooking.this, HotelBookingConfirm.class);
+                        intent.putExtra("userObject",x);
+                        intent.putExtra("place",plc);
                         startActivity(intent);
                     }
 
-                }catch (NumberFormatException e){
-                    Toast.makeText(getApplicationContext(),"Invalid Contact Number",Toast.LENGTH_LONG).show();
+                } catch (NumberFormatException e) {
+                    Toast.makeText(getApplicationContext(), "Invalid Contact Number", Toast.LENGTH_LONG).show();
                 }
             }
         });
     }
 
-    private void clearControls(){
+    private void clearControls() {
         name.setText("");
         email.setText("");
         days.setText("");
         room.setText("");
         phone.setText("");
     }
-    public String returnid(){
 
-        count = String.valueOf(Integer.valueOf(count)+1);
+    public String returnid() {
+
+        count = String.valueOf(Integer.valueOf(count) + 1);
 
         return count;
     }

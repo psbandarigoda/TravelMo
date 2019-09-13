@@ -8,12 +8,18 @@ import com.google.android.material.snackbar.Snackbar;
 
 import android.view.View;
 
+import androidx.annotation.NonNull;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import androidx.drawerlayout.widget.DrawerLayout;
 
@@ -22,12 +28,18 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.view.Menu;
 import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 
 public class GuideUsers extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
 
     Button search;
+    TextView textViewName,textViewDes;
+    String valueDis;
+    String valueChoice;
+    DatabaseReference dbRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +68,41 @@ public class GuideUsers extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
 
-        search = findViewById(R.id.search2);
+        Intent id = getIntent();
+        valueDis = id.getStringExtra("district");
+        valueChoice = id.getStringExtra("choice");
+        System.out.println("kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk");
+        System.out.println(valueDis);
+        System.out.println(valueChoice);
+
+        textViewName = findViewById(R.id.textViewName);
+        textViewDes = findViewById(R.id.textViewDes);
+
+        dbRef = FirebaseDatabase.getInstance().getReference().child("Kandy").child("Guide").child("G001");
+        dbRef.addListenerForSingleValueEvent(new ValueEventListener() {
+
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.hasChildren()) {
+                    System.out.println("has Children");
+                    //System.out.println(dataSnapshot.child("id").getValue().toString());
+                    textViewName.setText(dataSnapshot.child("name").getValue().toString());
+                    textViewDes.setText(dataSnapshot.child("description").getValue().toString());
+
+                } else {
+                    System.out.println("no Children");
+                    Toast.makeText(getApplicationContext(), "No Values to retrive", Toast.LENGTH_LONG).show();
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        search = findViewById(R.id.btnSearch);
     }
 
     @Override
@@ -74,15 +120,16 @@ public class GuideUsers extends AppCompatActivity {
     }
 
     @Override
-    protected void onResume(){
+    protected void onResume() {
         super.onResume();
 
         search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(GuideUsers.this,GuideBooking.class);
+                Intent intent = new Intent(GuideUsers.this, GuideBooking.class);
                 startActivity(intent);
             }
         });
+
     }
 }

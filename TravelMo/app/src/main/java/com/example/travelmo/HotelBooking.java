@@ -118,8 +118,11 @@ public class HotelBooking extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(),"Hotel Booked..",Toast.LENGTH_LONG).show();
                         clearControls();
 
+                        String val = count;
+
+
                         Intent intent = new Intent(HotelBooking.this,HotelBookingConfirm.class);
-                        intent.putExtra("userObject",count);
+                        intent.putExtra("userObject",val);
                         startActivity(intent);
                     }
 

@@ -28,6 +28,7 @@ public class HotelBookingConfirm extends AppCompatActivity {
     DatabaseReference dbref;
     String value;
     ArrayList hot;
+    DatabaseReference dref;
 
 
     @Override
@@ -54,7 +55,7 @@ public class HotelBookingConfirm extends AppCompatActivity {
         @Override
         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
              UserDetailForHotelReserv hotel = dataSnapshot.getValue(UserDetailForHotelReserv.class);
-            
+
 
         }
 
@@ -92,6 +93,28 @@ public class HotelBookingConfirm extends AppCompatActivity {
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                   dref = FirebaseDatabase.getInstance().getReference().child("HotelUser");
+                dref.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if(dataSnapshot.hasChild(value)){
+                            dref = FirebaseDatabase.getInstance().getReference().child("HotelUser").child(value);
+                            dref.removeValue();
+                            Toast.makeText(getApplicationContext(),"Deleted",Toast.LENGTH_LONG).show();
+
+                        }else {
+                            Toast.makeText(getApplicationContext(),"No data",Toast.LENGTH_LONG).show();
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+
+
                 Intent intent = new Intent(HotelBookingConfirm.this,HotelUsers.class);
                 startActivity(intent);
             }

@@ -28,6 +28,7 @@ public class HotelUsers extends AppCompatActivity {
     private AppBarConfiguration mAppBarConfiguration;
 
     Button search;
+    String place;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +58,9 @@ public class HotelUsers extends AppCompatActivity {
         NavigationUI.setupWithNavController(navigationView, navController);
 
         search = findViewById(R.id.search2);
+        Intent id = getIntent();
+        place = id.getStringExtra("district");
+
     }
 
     @Override
@@ -81,6 +85,7 @@ public class HotelUsers extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(HotelUsers.this,HotelBooking.class);
+                intent.putExtra("place",place);
                 startActivity(intent);
             }
         });

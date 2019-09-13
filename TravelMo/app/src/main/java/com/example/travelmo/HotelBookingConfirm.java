@@ -24,11 +24,15 @@ public class HotelBookingConfirm extends AppCompatActivity {
     Button edit;
     Button confirm;
     Button cancel;
-    TextView name11,email,phone,room,day;
+    TextView name11, email, phone, room, day;
     DatabaseReference dbref;
-    String value;
+    String value,mai,place;
     ArrayList hot;
     DatabaseReference dref;
+
+    ArrayList<UserDetailForHotelReserv> products;
+    DatabaseReference productsRef;
+    DatabaseReference mDatabase;
 
 
     @Override
@@ -47,36 +51,49 @@ public class HotelBookingConfirm extends AppCompatActivity {
         day = findViewById(R.id.days1);
 
         Intent id = getIntent();
-         value = id.getStringExtra("userObject");
+        value = id.getStringExtra("userObject");
+        place = id.getStringExtra("place");
 
 
-    DatabaseReference dbref = FirebaseDatabase.getInstance().getReference().child("HotelUser").child(value);
-    dbref.addListenerForSingleValueEvent(new ValueEventListener() {
-        @Override
-        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-             UserDetailForHotelReserv hotel = dataSnapshot.getValue(UserDetailForHotelReserv.class);
+        DatabaseReference dbref = FirebaseDatabase.getInstance().getReference().child(place).child("HotelUser").child(value);
+        dbref.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
+                if (dataSnapshot.hasChildren()){
+                     name11.setText( dataSnapshot.child("name").getValue().toString());
+                     email.setText(dataSnapshot.child("email").getValue().toString());
+                     day.setText(dataSnapshot.child("days").getValue().toString());
+                     room.setText(dataSnapshot.child("rooms").getValue().toString());
+//                     phone.setText(dataSnapshot.child("phone").getValue().toString());
 
-        }
+                     Toast.makeText(getApplicationContext(),"Yes",Toast.LENGTH_LONG).show();
+                 }
+                else{
+                     Toast.makeText(getApplicationContext(),"No",Toast.LENGTH_LONG).show();
+                 }
 
-        @Override
-        public void onCancelled(@NonNull DatabaseError databaseError) {
+            }
 
-        }
-    });
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
 
+            }
+        });
 
 
     }
 
     @Override
-    protected void onResume(){
+    protected void onResume() {
         super.onResume();
 
         edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(HotelBookingConfirm.this,HotelBookingDetailEdit.class);
+                Intent intent = new Intent(HotelBookingConfirm.this, HotelBookingDetailEdit.class);
+                intent.putExtra("id",value);
+                intent.putExtra("place",place);
                 startActivity(intent);
 
             }
@@ -85,7 +102,7 @@ public class HotelBookingConfirm extends AppCompatActivity {
         confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(HotelBookingConfirm.this,HotelUsers.class);
+                Intent intent = new Intent(HotelBookingConfirm.this, HotelUsers.class);
                 startActivity(intent);
             }
         });
@@ -94,17 +111,17 @@ public class HotelBookingConfirm extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                   dref = FirebaseDatabase.getInstance().getReference().child("HotelUser");
+                dref = FirebaseDatabase.getInstance().getReference().child(place).child("HotelUser");
                 dref.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        if(dataSnapshot.hasChild(value)){
+                        if (dataSnapshot.hasChild(value)) {
                             dref = FirebaseDatabase.getInstance().getReference().child("HotelUser").child(value);
                             dref.removeValue();
-                            Toast.makeText(getApplicationContext(),"Deleted",Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(), "Deleted", Toast.LENGTH_LONG).show();
 
-                        }else {
-                            Toast.makeText(getApplicationContext(),"No data",Toast.LENGTH_LONG).show();
+                        } else {
+                            Toast.makeText(getApplicationContext(), "No data", Toast.LENGTH_LONG).show();
                         }
                     }
 
@@ -115,7 +132,7 @@ public class HotelBookingConfirm extends AppCompatActivity {
                 });
 
 
-                Intent intent = new Intent(HotelBookingConfirm.this,HotelUsers.class);
+                Intent intent = new Intent(HotelBookingConfirm.this, HotelUsers.class);
                 startActivity(intent);
             }
         });

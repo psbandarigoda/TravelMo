@@ -29,6 +29,7 @@ public class UserChoice extends AppCompatActivity {
 
     Button hotel;
     Button guide;
+    String value="kandy";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +58,10 @@ public class UserChoice extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
 
+        Intent id = getIntent();
+        value = id.getStringExtra("district");
+
+
         hotel = findViewById(R.id.hotel);
         guide = findViewById(R.id.guide);
     }
@@ -78,22 +83,59 @@ public class UserChoice extends AppCompatActivity {
 
     @Override
     protected void onResume() {
-
         super.onResume();
-        hotel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(UserChoice.this,HotelUsers.class);
-                startActivity(intent);
-            }
-        });
 
-        guide.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(UserChoice.this,GuideUsers.class);
-                startActivity(intent);
-            }
-        });
+        System.out.println("uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu");
+        System.out.println(value);
+
+        switch (value) {
+            case "kandy":
+
+                hotel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent intent = new Intent(UserChoice.this, HotelUsers.class);
+
+                        intent.putExtra("district", "kandy");
+                        intent.putExtra("choice", "hotel");
+                        startActivity(intent);
+                    }
+                });
+
+                guide.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent intent = new Intent(UserChoice.this, GuideUsers.class);
+                        intent.putExtra("district", "kandy");
+                        intent.putExtra("choice", "guide");
+                        startActivity(intent);
+                    }
+                });
+                break;
+
+            case "galle":
+                hotel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent intent = new Intent(UserChoice.this, HotelUsers.class);
+
+                        intent.putExtra("district", "galle");
+                        intent.putExtra("choice", "hotel");
+                        startActivity(intent);
+                    }
+                });
+
+                guide.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent intent = new Intent(UserChoice.this, GuideUsers.class);
+                        intent.putExtra("district", "galle");
+                        intent.putExtra("choice", "guide");
+                        startActivity(intent);
+                    }
+                });
+                break;
+        }
+
     }
 }

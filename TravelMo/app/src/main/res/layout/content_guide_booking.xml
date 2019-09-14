@@ -100,14 +100,14 @@
         android:inputType="textPersonName" />
 
     <Button
-        android:id="@+id/conform"
+        android:id="@+id/btnNext"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="150dp"
         android:layout_marginTop="100dp"
         android:background="@drawable/button_shape"
-        android:onClick="@string/conform"
-        android:text="@string/conform" />
+        android:onClick="@string/next"
+        android:text="@string/next" />
 
     <TextView
         android:id="@+id/textView12"

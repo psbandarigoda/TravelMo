@@ -27,7 +27,7 @@ public class GuideBookingConfirm extends AppCompatActivity {
     Button cancel;
     TextView txt_name, txt_mail, txt_days, txt_vehicle, txt_phoneNumber;
     DatabaseReference dbRef;
-    String value;
+    String value, place;
 
 
     @Override
@@ -36,7 +36,7 @@ public class GuideBookingConfirm extends AppCompatActivity {
         setContentView(R.layout.activity_guide_booking_confirm);
 
         editDtl = findViewById(R.id.btnedit2);
-        confirmDtl = findViewById(R.id.next);
+        confirmDtl = findViewById(R.id.confirm);
         cancel = findViewById(R.id.cancel112);
 
         txt_name = findViewById(R.id.textViewName);
@@ -47,33 +47,22 @@ public class GuideBookingConfirm extends AppCompatActivity {
 
         Intent id = getIntent();
         value = id.getStringExtra("userObject");
+        place = id.getStringExtra("place");
 
-        DatabaseReference dbref = FirebaseDatabase.getInstance().getReference().child("GuideReceiveUser").child(value);
+
+        DatabaseReference dbref = FirebaseDatabase.getInstance().getReference().child(place).child("GuideReceiveUser").child(value);
         dbref.addListenerForSingleValueEvent(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                UserDetailForGuideReserv hotel = dataSnapshot.getValue(UserDetailForGuideReserv.class);
-//
-//
-//            }
-
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError databaseError) {
-//
-//            }
-
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.hasChildren()) {
-                    System.out.println("has Children");
-                    UserDetailForGuideReserv Guide = dataSnapshot.getValue(UserDetailForGuideReserv.class);
-                    //System.out.println(dataSnapshot.child("id").getValue().toString());
 
-//                    txt_name.setText(dataSnapshot.child("name").getValue().toString());
-//                    txt_mail.setText(dataSnapshot.child("email").getValue().toString());
-//                    txt_days.setText(dataSnapshot.child("days").getValue().toString());
+                    txt_name.setText(dataSnapshot.child("name").getValue().toString());
+                    txt_mail.setText(dataSnapshot.child("email").getValue().toString());
+                    txt_days.setText(dataSnapshot.child("days").getValue().toString());
 //                    txt_vehicle.setText(dataSnapshot.child("vehicle").getValue().toString());
-//                    txt_phoneNumber.setText(dataSnapshot.child("phoneNumber").getValue().toString());
+                    txt_phoneNumber.setText(dataSnapshot.child("phoneNumber").getValue().toString());
+
+                    Toast.makeText(getApplicationContext(), "Added", Toast.LENGTH_LONG).show();
 
                 } else {
                     System.out.println("no Children");
@@ -89,51 +78,6 @@ public class GuideBookingConfirm extends AppCompatActivity {
 
         });
 
-
-        DatabaseReference users = dbRef.child("GuideReceiveUser");
-        users.orderByChild("email").equalTo("ragith@gmail.com").addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-
-                dataSnapshot.getKey();
-                Log.d("User",dataSnapshot.getRef().toString());
-                Log.d("User",dataSnapshot.getValue().toString());
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-//                Log.d("User",firebaseError.getMessage() );
-            }
-
-        });
-
-//        dbRef = FirebaseDatabase.getInstance().getReference().child("GuideReceiveUser").child(value);
-//        dbRef.addListenerForSingleValueEvent(new ValueEventListener() {
-//
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                if (dataSnapshot.hasChildren()) {
-//                    System.out.println("has Children");
-//                    //System.out.println(dataSnapshot.child("id").getValue().toString());
-//                    txt_name.setText(dataSnapshot.child("name").getValue().toString());
-//                    txt_mail.setText(dataSnapshot.child("email").getValue().toString());
-//                    txt_days.setText(dataSnapshot.child("days").getValue().toString());
-//                    txt_vehicle.setText(dataSnapshot.child("vehicle").getValue().toString());
-//                    txt_phoneNumber.setText(dataSnapshot.child("phoneNumber").getValue().toString());
-//
-//                } else {
-//                    System.out.println("no Children");
-//                    Toast.makeText(getApplicationContext(), "No Values to retrive", Toast.LENGTH_LONG).show();
-//
-//                }
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError databaseError) {
-//
-//            }
-//        });
-
     }
 
 
@@ -145,8 +89,20 @@ public class GuideBookingConfirm extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(GuideBookingConfirm.this, GuideBookingDetailEdit.class);
+                intent.putExtra("id", value);
+                intent.putExtra("place", place);
                 startActivity(intent);
+            }
+        });
 
+
+        confirmDtl.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                sendMail();
+                Toast.makeText(getApplicationContext(), "Email Sending", Toast.LENGTH_LONG).show();
+//                Intent intent = new Intent(GuideBookingConfirm.this, GuideUsers.class);
+//                startActivity(intent);
             }
         });
 
@@ -155,12 +111,12 @@ public class GuideBookingConfirm extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                dbRef = FirebaseDatabase.getInstance().getReference().child("GuideReceiveUser");
+                dbRef = FirebaseDatabase.getInstance().getReference().child(place).child("GuideReceiveUser");
                 dbRef.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         if (dataSnapshot.hasChild(value)) {
-                            dbRef = FirebaseDatabase.getInstance().getReference().child("GuideReceiveUser").child(value);
+                            dbRef = FirebaseDatabase.getInstance().getReference().child(place).child("GuideReceiveUser").child(value);
                             dbRef.removeValue();
                             Toast.makeText(getApplicationContext(), "Deleted", Toast.LENGTH_LONG).show();
 
@@ -181,5 +137,24 @@ public class GuideBookingConfirm extends AppCompatActivity {
         });
     }
 
+
+    private void sendMail(){
+        String recipientList = txt_mail.getText().toString();
+        String[] recipient = recipientList.split(",");
+        String subject = "TravelMo Guid Booking Service";
+        String message = "TravelMo(pvt)ltd Guid Booking Service " +
+                "\n\n I'm --CustomerName-- I want to Book --Count--days\n" +
+                "my contact number is --ContactNumber-- Can you please inform to this number.\n\n" +
+                "Best Regards.";
+
+
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.putExtra(Intent.EXTRA_EMAIL,recipient);
+        intent.putExtra(Intent.EXTRA_SUBJECT,subject);
+        intent.putExtra(Intent.EXTRA_TEXT,message);
+
+        intent.setType("message/rfc822");
+        startActivity(Intent.createChooser(intent,"Choose an Email Method"));
+    }
 
 }

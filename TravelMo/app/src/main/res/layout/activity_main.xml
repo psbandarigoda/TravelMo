@@ -32,9 +32,34 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/gotoTravel_button" />
+                android:text="@string/gotoTravel_button"
+                android:background="@color/cardview_dark_background"
+                android:textColor="@color/colorPrimaryLight"/>
 
         </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/textWelcome"
+        android:layout_width="297dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="40dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="WELCOME..!"
+        android:textAlignment="viewEnd"
+        android:textSize="25dp" />
+
+    <TextView
+        android:id="@+id/textMoto"
+        android:layout_width="297dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="100dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="Discover Your Life \n Travel with Confidence"
+        android:textAlignment="viewEnd"
+        android:textSize="25dp" />
 
 
 </FrameLayout>

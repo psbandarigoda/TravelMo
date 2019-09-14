@@ -18,7 +18,8 @@
         android:paddingRight="50dp"
         android:shadowColor="@color/colorPrimaryDark"
         android:text="@string/hottel"
-        android:textColor="@color/colorText" />
+        android:alpha="0.8"
+        android:textColor="@color/cardview_dark_background" />
 
     <Button
         android:id="@+id/guide"
@@ -27,11 +28,12 @@
         android:layout_marginStart="120dp"
         android:layout_marginTop="30dp"
         android:paddingLeft="50dp"
-        android:paddingRight="50dp"
+        android:paddingRight="65dp"
         android:shadowColor="@color/colorPrimaryDark"
         android:text="@string/guide"
         android:textAlignment="center"
-        android:textColor="@color/colorText" />
+        android:alpha="0.8"
+        android:textColor="@color/cardview_dark_background" />
 
     <fragment
         android:id="@+id/nav_host_fragment"

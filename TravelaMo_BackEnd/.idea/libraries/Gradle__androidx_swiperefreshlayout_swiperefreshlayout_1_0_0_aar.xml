@@ -1,11 +1,11 @@
 <component name="libraryTable">
   <library name="Gradle: androidx.swiperefreshlayout:swiperefreshlayout:1.0.0@aar">
     <ANNOTATIONS>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/49889871cabbe1cdbdbbd31bfbb1a802/annotations.zip!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/ec00560b846c5411bc744d192643c1c0/annotations.zip!/" />
     </ANNOTATIONS>
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/49889871cabbe1cdbdbbd31bfbb1a802/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/49889871cabbe1cdbdbbd31bfbb1a802/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/ec00560b846c5411bc744d192643c1c0/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/ec00560b846c5411bc744d192643c1c0/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

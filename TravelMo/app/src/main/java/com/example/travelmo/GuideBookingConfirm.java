@@ -138,7 +138,7 @@ public class GuideBookingConfirm extends AppCompatActivity {
     }
 
 
-    private void sendMail(){
+    private void sendMail() {
         String recipientList = txt_mail.getText().toString();
         String[] recipient = recipientList.split(",");
         String subject = "TravelMo Guid Booking Service";
@@ -149,12 +149,12 @@ public class GuideBookingConfirm extends AppCompatActivity {
 
 
         Intent intent = new Intent(Intent.ACTION_SEND);
-        intent.putExtra(Intent.EXTRA_EMAIL,recipient);
-        intent.putExtra(Intent.EXTRA_SUBJECT,subject);
-        intent.putExtra(Intent.EXTRA_TEXT,message);
+        intent.putExtra(Intent.EXTRA_EMAIL, recipient);
+        intent.putExtra(Intent.EXTRA_SUBJECT, subject);
+        intent.putExtra(Intent.EXTRA_TEXT, message);
 
         intent.setType("message/rfc822");
-        startActivity(Intent.createChooser(intent,"Choose an Email Method"));
+        startActivity(Intent.createChooser(intent, "Choose an Email Method"));
     }
 
 }

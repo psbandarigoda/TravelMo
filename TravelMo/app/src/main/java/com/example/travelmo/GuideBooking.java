@@ -44,7 +44,7 @@ public class GuideBooking extends AppCompatActivity {
     UserDetailForGuideReserv detailForGuideReserv;
     DatabaseReference dbRef;
     int count = 111111;
-    String plc,x;
+    String plc, x;
     SimpleDateFormat currentDate = new SimpleDateFormat("ddMMyyyy");
     Date todayDate = new Date();
     String thisDate = currentDate.format(todayDate);
@@ -141,7 +141,7 @@ public class GuideBooking extends AppCompatActivity {
 //                        detailForGuideReserv.setVehicle(Text_Phone.getText().toString().trim());
                         detailForGuideReserv.setPhoneNumber(Integer.parseInt(Text_Phone.getText().toString().trim()));
 
-                        x = thisDate+Text_Name.getText().toString().trim();
+                        x = thisDate + Text_Name.getText().toString().trim();
                         dbRef.child(x).setValue(detailForGuideReserv);
 
                         Toast.makeText(getApplicationContext(), "Guide Booking..", Toast.LENGTH_LONG).show();
@@ -151,7 +151,7 @@ public class GuideBooking extends AppCompatActivity {
 
                         Intent intent = new Intent(GuideBooking.this, GuideBookingConfirm.class);
                         intent.putExtra("userObject", x);
-                        intent.putExtra("place",plc);
+                        intent.putExtra("place", plc);
                         startActivity(intent);
                     }
 

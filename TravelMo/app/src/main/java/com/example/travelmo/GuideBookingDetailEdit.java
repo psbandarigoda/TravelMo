@@ -112,7 +112,7 @@ public class GuideBookingDetailEdit extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                Intent intent = new Intent(GuideBookingDetailEdit.this,GuideUsers.class);
+                Intent intent = new Intent(GuideBookingDetailEdit.this, GuideUsers.class);
                 startActivity(intent);
             }
         });

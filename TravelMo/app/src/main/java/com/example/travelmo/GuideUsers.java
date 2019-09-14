@@ -36,7 +36,7 @@ public class GuideUsers extends AppCompatActivity {
     private AppBarConfiguration mAppBarConfiguration;
 
     Button search;
-    TextView textViewName,textViewDes;
+    TextView textViewName, textViewDes;
     String valueDis;
     String valueChoice;
     DatabaseReference dbRef;
@@ -134,7 +134,7 @@ public class GuideUsers extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(GuideUsers.this, GuideBooking.class);
-                intent.putExtra("place",place);
+                intent.putExtra("place", place);
                 startActivity(intent);
             }
         });

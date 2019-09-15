@@ -79,7 +79,7 @@ public class HotelUsers extends AppCompatActivity {
 //        NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
 //        NavigationUI.setupWithNavController(navigationView, navController);
 
-        search = findViewById(R.id.search2);
+//        search = findViewById(R.id.search2);
 
 
         Intent id = getIntent();

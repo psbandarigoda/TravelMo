@@ -19,7 +19,7 @@ import com.google.firebase.database.ValueEventListener;
 public class HotelBookingDetailEdit extends AppCompatActivity {
 
     Button save,cancel;
-String place,value;
+    String place,value;
     EditText uName,uEmail,uday,uRoom,uPhone;
     DatabaseReference dref;
     UserDetailForHotelReserv hotel;

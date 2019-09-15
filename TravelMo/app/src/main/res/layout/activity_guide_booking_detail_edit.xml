@@ -8,16 +8,27 @@
     tools:context=".GuideBookingDetailEdit">
 
     <TextView
-        android:id="@+id/textView01"
+        android:id="@+id/textView06"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="100dp"
+        android:layout_marginTop="30dp"
+        android:drawableLeft="@drawable/ic_forum_black_24dp"
+        android:text=" Edit Your Details"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="25dp" />
+
+    <TextView
+        android:id="@+id/textName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="30dp"
-        android:layout_marginTop="150dp"
+        android:layout_marginTop="100dp"
         android:text="Name"
         android:textColor="@color/colorPrimaryText" />
 
     <EditText
-        android:id="@+id/editText01"
+        android:id="@+id/editTextName"
         android:layout_width="281dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="100dp"
@@ -25,26 +36,9 @@
         android:ems="10"
         android:inputType="textPersonName" />
 
-    <TextView
-        android:id="@+id/textView02"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="30dp"
-        android:text="E-Mail"
-        android:textColor="@color/colorPrimaryText" />
-
-    <EditText
-        android:id="@+id/editText02"
-        android:layout_width="282dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="100dp"
-        android:layout_marginTop="-30dp"
-        android:ems="10"
-        android:inputType="textPersonName" />
 
     <TextView
-        android:id="@+id/textView03"
+        android:id="@+id/textdays"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="30dp"
@@ -53,7 +47,7 @@
         android:textColor="@color/colorPrimaryText" />
 
     <EditText
-        android:id="@+id/editText03"
+        android:id="@+id/editTextDays"
         android:layout_width="278dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="100dp"
@@ -62,7 +56,7 @@
         android:inputType="textPersonName" />
 
     <TextView
-        android:id="@+id/textView9"
+        android:id="@+id/textVehicle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="30dp"
@@ -72,7 +66,7 @@
 
 
     <Spinner
-        android:id="@+id/spinner5"
+        android:id="@+id/spinnerVehicle"
         android:layout_width="150dp"
         android:layout_height="43dp"
         android:layout_marginLeft="130dp"
@@ -82,7 +76,7 @@
 
 
     <TextView
-        android:id="@+id/textView05"
+        android:id="@+id/textPhone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="30dp"
@@ -91,7 +85,7 @@
         android:textColor="@color/colorPrimaryText" />
 
     <EditText
-        android:id="@+id/editText05"
+        android:id="@+id/editTextPhone"
         android:layout_width="254dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="120dp"
@@ -101,8 +95,8 @@
 
     <Button
         android:id="@+id/save01"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="200dp"
+        android:layout_height="40dp"
         android:layout_marginLeft="150dp"
         android:layout_marginTop="70dp"
         android:background="@drawable/button_shape"
@@ -110,15 +104,15 @@
         android:text="@string/save"
         android:textColor="@color/colorText" />
 
-    <TextView
-        android:id="@+id/textView06"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="100dp"
-        android:layout_marginTop="-510dp"
-        android:drawableLeft="@drawable/ic_forum_black_24dp"
-        android:text=" Edit Your Details"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="25dp" />
+    <Button
+        android:id="@+id/confirm"
+        android:layout_width="200dp"
+        android:layout_height="40dp"
+        android:layout_marginLeft="150dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/button_shape"
+        android:text="@string/confirm"
+        android:textColor="@color/colorText" />
+
 
 </LinearLayout>

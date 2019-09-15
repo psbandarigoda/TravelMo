@@ -26,7 +26,11 @@ public class HotelBookingConfirm extends AppCompatActivity {
     Button cancel;
     TextView name11, email, phone, room, day;
     DatabaseReference dbref;
+<<<<<<< HEAD
     String value,mai,place,name;
+=======
+    String value, mai, place;
+>>>>>>> 12631f879ab44d88b1cbc1cdcfb285038a4b6639
     ArrayList hot;
     DatabaseReference dref;
 
@@ -55,12 +59,17 @@ public class HotelBookingConfirm extends AppCompatActivity {
         mai = id.getStringExtra("email");
         name = id.getStringExtra("name");
 
+<<<<<<< HEAD
 
         DatabaseReference dbref = FirebaseDatabase.getInstance().getReference().child("kandy").child("HotelUser").child(value);
+=======
+        DatabaseReference dbref = FirebaseDatabase.getInstance().getReference().child(place).child("HotelUser").child(value);
+>>>>>>> 12631f879ab44d88b1cbc1cdcfb285038a4b6639
         dbref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
+<<<<<<< HEAD
                 if (dataSnapshot.hasChildren()){
                      name11.setText( dataSnapshot.child("name").getValue().toString());
                      email.setText(dataSnapshot.child("email").getValue().toString());
@@ -73,6 +82,19 @@ public class HotelBookingConfirm extends AppCompatActivity {
                 else{
                      Toast.makeText(getApplicationContext(),"No Details",Toast.LENGTH_LONG).show();
                  }
+=======
+                if (dataSnapshot.hasChildren()) {
+                    name11.setText(dataSnapshot.child("name").getValue().toString());
+                    email.setText(dataSnapshot.child("email").getValue().toString());
+                    day.setText(dataSnapshot.child("days").getValue().toString());
+                    room.setText(dataSnapshot.child("rooms").getValue().toString());
+//                     phone.setText(dataSnapshot.child("phone").getValue().toString());
+
+                    Toast.makeText(getApplicationContext(), "Yes", Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(getApplicationContext(), "No", Toast.LENGTH_LONG).show();
+                }
+>>>>>>> 12631f879ab44d88b1cbc1cdcfb285038a4b6639
 
             }
 
@@ -82,6 +104,15 @@ public class HotelBookingConfirm extends AppCompatActivity {
             }
         });
 
+
+//        confirm.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                sendMail();
+//                Intent intent = new Intent(HotelBookingConfirm.this, HotelUsers.class);
+//                startActivity(intent);
+//            }
+//        });
 
     }
 
@@ -93,8 +124,13 @@ public class HotelBookingConfirm extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(HotelBookingConfirm.this, HotelBookingDetailEdit.class);
+<<<<<<< HEAD
                 intent.putExtra("id",value);
                 intent.putExtra("email",mai);
+=======
+                intent.putExtra("id", value);
+                intent.putExtra("place", place);
+>>>>>>> 12631f879ab44d88b1cbc1cdcfb285038a4b6639
                 startActivity(intent);
 
             }
@@ -120,7 +156,11 @@ public class HotelBookingConfirm extends AppCompatActivity {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         if (dataSnapshot.hasChild(value)) {
+<<<<<<< HEAD
                             dref = FirebaseDatabase.getInstance().getReference().child("kandy").child("HotelUser").child(value);
+=======
+                            dref = FirebaseDatabase.getInstance().getReference().child(place).child("HotelUser").child(value);
+>>>>>>> 12631f879ab44d88b1cbc1cdcfb285038a4b6639
                             dref.removeValue();
                             Toast.makeText(getApplicationContext(), "Deleted", Toast.LENGTH_LONG).show();
 
@@ -142,6 +182,7 @@ public class HotelBookingConfirm extends AppCompatActivity {
         });
     }
 
+<<<<<<< HEAD
     private void sendHotelMail(){
         String recipient = email.getText().toString();
         String[] rec= recipient.split(",");
@@ -162,4 +203,7 @@ public class HotelBookingConfirm extends AppCompatActivity {
         super.onPause();
         finish();
     }
+=======
+
+>>>>>>> 12631f879ab44d88b1cbc1cdcfb285038a4b6639
 }

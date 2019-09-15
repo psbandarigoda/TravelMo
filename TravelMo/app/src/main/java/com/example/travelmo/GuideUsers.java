@@ -36,10 +36,11 @@ public class GuideUsers extends AppCompatActivity {
     private AppBarConfiguration mAppBarConfiguration;
 
     Button search;
-    TextView textViewName,textViewDes;
+    TextView textViewName, textViewDes;
     String valueDis;
     String valueChoice;
     DatabaseReference dbRef;
+    String place;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,10 +76,16 @@ public class GuideUsers extends AppCompatActivity {
         System.out.println(valueDis);
         System.out.println(valueChoice);
 
+        String des = valueDis;
+        String cho = valueChoice;
+
         textViewName = findViewById(R.id.textViewName);
         textViewDes = findViewById(R.id.textViewDes);
 
-        dbRef = FirebaseDatabase.getInstance().getReference().child("Kandy").child("Guide").child("G001");
+        Intent gid = getIntent();
+        place = gid.getStringExtra("district");
+
+        dbRef = FirebaseDatabase.getInstance().getReference().child("GalleClient").child("Guide").child("G001");
         dbRef.addListenerForSingleValueEvent(new ValueEventListener() {
 
             @Override
@@ -127,6 +134,7 @@ public class GuideUsers extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(GuideUsers.this, GuideBooking.class);
+                intent.putExtra("place", place);
                 startActivity(intent);
             }
         });

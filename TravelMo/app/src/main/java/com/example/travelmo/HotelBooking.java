@@ -115,6 +115,7 @@ public class HotelBooking extends AppCompatActivity {
             public void onClick(View view) {
 
                 dbref = FirebaseDatabase.getInstance().getReference().child("kandy").child("HotelUser");
+                dbref = FirebaseDatabase.getInstance().getReference().child(plc).child("HotelUser");
                 try {
                     if (TextUtils.isEmpty(name.getText().toString()))
                         Toast.makeText(getApplicationContext(), "Please Enter Name", Toast.LENGTH_LONG).show();
@@ -135,6 +136,7 @@ public class HotelBooking extends AppCompatActivity {
 //                        hotel.setCounter(ans);
 
                          x =  day + name.getText().toString().trim();
+                        x = email.getText().toString().trim();
                         dbref.child(x).setValue(hotel);
 
                         Toast.makeText(getApplicationContext(), "Hotel Booked..", Toast.LENGTH_LONG).show();

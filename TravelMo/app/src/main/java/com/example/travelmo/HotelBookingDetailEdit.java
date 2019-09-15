@@ -42,7 +42,7 @@ String place,value;
 
 
         Intent id = getIntent();
-         place = id.getStringExtra("place");
+         place = id.getStringExtra("email");
          value = id.getStringExtra("id");
     }
 
@@ -54,7 +54,7 @@ String place,value;
             @Override
             public void onClick(View view) {
 
-                dref = FirebaseDatabase.getInstance().getReference().child(place).child("HotelUser");
+                dref = FirebaseDatabase.getInstance().getReference().child("kandy").child("HotelUser");
                 dref.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -66,7 +66,7 @@ String place,value;
                                 hotel.setDays(uday.getText().toString().trim());
                                 hotel.setPhone(Integer.parseInt(uPhone.getText().toString().trim()));
 
-                                dref = FirebaseDatabase.getInstance().getReference().child(place).child("HotelUser").child(value) ;
+                                dref = FirebaseDatabase.getInstance().getReference().child("kandy").child("HotelUser").child(value) ;
                                 dref.setValue(hotel);
                                 Toast.makeText(getApplicationContext(),"Updated",Toast.LENGTH_LONG).show();
 
@@ -95,11 +95,32 @@ String place,value;
             @Override
             public void onClick(View view) {
 
-                Intent intent = new Intent(HotelBookingDetailEdit.this,HotelUsers.class);
-                startActivity(intent);
+                sendHotelMail();
+//                Intent intent = new Intent(HotelBookingDetailEdit.this,HotelUsers.class);
+//                startActivity(intent);
             }
         });
     }
 
+    private void sendHotelMail(){
+        String recipient = place;
+        String[] rec= recipient.split(",");
+        String sender = "TravelMo Hotel Booking Service";
+        String message ="Name :"+uName.getText().toString().trim()+"Rooms:"+uRoom.getText().toString().trim()+
+                "Days:"+uday.getText().toString().trim()+"ContactNo:"+uPhone.getText().toString().trim();
 
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.putExtra(Intent.EXTRA_EMAIL,rec);
+        intent.putExtra(Intent.EXTRA_SUBJECT,sender);
+        intent.putExtra(Intent.EXTRA_TEXT,message);
+
+        intent.setType("message/123");
+        startActivity(Intent.createChooser(intent,"Choose service"));
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        finish();
+    }
 }

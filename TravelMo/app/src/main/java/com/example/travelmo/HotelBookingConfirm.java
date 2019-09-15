@@ -26,7 +26,7 @@ public class HotelBookingConfirm extends AppCompatActivity {
     Button cancel;
     TextView name11, email, phone, room, day;
     DatabaseReference dbref;
-    String value,mai,place;
+    String value,mai,place,name;
     ArrayList hot;
     DatabaseReference dref;
 
@@ -52,10 +52,11 @@ public class HotelBookingConfirm extends AppCompatActivity {
 
         Intent id = getIntent();
         value = id.getStringExtra("userObject");
-        place = id.getStringExtra("place");
+        mai = id.getStringExtra("email");
+        name = id.getStringExtra("name");
 
 
-        DatabaseReference dbref = FirebaseDatabase.getInstance().getReference().child(place).child("HotelUser").child(value);
+        DatabaseReference dbref = FirebaseDatabase.getInstance().getReference().child("kandy").child("HotelUser").child(value);
         dbref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -65,12 +66,12 @@ public class HotelBookingConfirm extends AppCompatActivity {
                      email.setText(dataSnapshot.child("email").getValue().toString());
                      day.setText(dataSnapshot.child("days").getValue().toString());
                      room.setText(dataSnapshot.child("rooms").getValue().toString());
-//                     phone.setText(dataSnapshot.child("phone").getValue().toString());
+                     phone.setText(dataSnapshot.child("phone").getValue().toString());
 
-                     Toast.makeText(getApplicationContext(),"Yes",Toast.LENGTH_LONG).show();
+                     Toast.makeText(getApplicationContext(),"Your Details",Toast.LENGTH_LONG).show();
                  }
                 else{
-                     Toast.makeText(getApplicationContext(),"No",Toast.LENGTH_LONG).show();
+                     Toast.makeText(getApplicationContext(),"No Details",Toast.LENGTH_LONG).show();
                  }
 
             }
@@ -93,7 +94,7 @@ public class HotelBookingConfirm extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(HotelBookingConfirm.this, HotelBookingDetailEdit.class);
                 intent.putExtra("id",value);
-                intent.putExtra("place",place);
+                intent.putExtra("email",mai);
                 startActivity(intent);
 
             }
@@ -102,8 +103,11 @@ public class HotelBookingConfirm extends AppCompatActivity {
         confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(HotelBookingConfirm.this, HotelUsers.class);
-                startActivity(intent);
+
+                sendHotelMail();
+                Toast.makeText(getApplicationContext(),"sending email",Toast.LENGTH_LONG).show();
+//                Intent intent = new Intent(HotelBookingConfirm.this, HotelUsers.class);
+//                startActivity(intent);
             }
         });
 
@@ -111,12 +115,12 @@ public class HotelBookingConfirm extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                dref = FirebaseDatabase.getInstance().getReference().child(place).child("HotelUser");
+                dref = FirebaseDatabase.getInstance().getReference().child("kandy").child("HotelUser");
                 dref.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         if (dataSnapshot.hasChild(value)) {
-                            dref = FirebaseDatabase.getInstance().getReference().child("HotelUser").child(value);
+                            dref = FirebaseDatabase.getInstance().getReference().child("kandy").child("HotelUser").child(value);
                             dref.removeValue();
                             Toast.makeText(getApplicationContext(), "Deleted", Toast.LENGTH_LONG).show();
 
@@ -136,5 +140,26 @@ public class HotelBookingConfirm extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    private void sendHotelMail(){
+        String recipient = email.getText().toString();
+        String[] rec= recipient.split(",");
+        String sender = "TravelMo Hotel Booking Service";
+        String message ="TravelMo: \n Name"+name;
+
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.putExtra(Intent.EXTRA_EMAIL,rec);
+        intent.putExtra(Intent.EXTRA_SUBJECT,sender);
+        intent.putExtra(Intent.EXTRA_TEXT,message);
+
+        intent.setType("message/123");
+        startActivity(Intent.createChooser(intent,"Choose service"));
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        finish();
     }
 }

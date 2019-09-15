@@ -42,7 +42,7 @@
             >
 
             <TextView
-                android:id="@+id/doctor_name"
+                android:id="@+id/txtName1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/hotel"
@@ -51,7 +51,7 @@
 
 
             <TextView
-                android:id="@+id/hospital_name"
+                android:id="@+id/txtDes1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/desc"
@@ -65,7 +65,7 @@
                 android:orientation="horizontal">
 
                 <Button
-                    android:id="@+id/update"
+                    android:id="@+id/updatebtn"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -81,7 +81,7 @@
 
 
                 <Button
-                    android:id="@+id/delete"
+                    android:id="@+id/deletebtn"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"

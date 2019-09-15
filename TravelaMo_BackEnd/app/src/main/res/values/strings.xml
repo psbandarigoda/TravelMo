@@ -38,6 +38,7 @@
     <string name="hotel_list">Hotels List</string>
     <string name="all_list">Hotels and Guides List</string>
     <string name="guide_list">Guides List</string>
+    <string name="guide_Btn">ADD GUIDE</string>
 
     <string name="topic_guide">Add a Guide</string>
     <string name="gtxt_name">Full Name</string>

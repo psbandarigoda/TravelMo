@@ -7,6 +7,15 @@ public class UserDetailForHotelReserv {
     String days;
     String rooms;
     int phone;
+    String counter;
+
+    public String getCounter() {
+        return counter;
+    }
+
+    public void setCounter(String counter) {
+        this.counter = counter;
+    }
 
     public UserDetailForHotelReserv() {
     }
@@ -58,4 +67,11 @@ public class UserDetailForHotelReserv {
     public void setPhone(int phone) {
         this.phone = phone;
     }
+
+//    public String returnid() {
+//
+//        counter = String.valueOf(Integer.valueOf(counter) + 1);
+//
+//        return counter;
+//    }
 }

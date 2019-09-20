@@ -8,20 +8,33 @@ import com.google.android.material.snackbar.Snackbar;
 
 import android.view.View;
 
+import androidx.annotation.NonNull;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.Menu;
 import android.widget.Button;
+import android.widget.ProgressBar;
+import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserChoice extends AppCompatActivity {
 
@@ -30,6 +43,8 @@ public class UserChoice extends AppCompatActivity {
     Button hotel;
     Button guide;
     String value="kandy";
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,12 +73,19 @@ public class UserChoice extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
 
+
+
+
+
         Intent id = getIntent();
         value = id.getStringExtra("district");
 
 
         hotel = findViewById(R.id.hotel);
         guide = findViewById(R.id.guide);
+
+
+
     }
 
 
@@ -85,15 +107,18 @@ public class UserChoice extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
+
         System.out.println("uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu");
         System.out.println(value);
-
+//        mBtHome.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_mainFragment_to_homePageFragment));
         switch (value) {
             case "kandy":
 
                 hotel.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+
+
                         Intent intent = new Intent(UserChoice.this, HotelUsers.class);
 
                         intent.putExtra("district", "kandy");

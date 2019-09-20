@@ -30,6 +30,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class HotelBooking extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
@@ -38,8 +41,12 @@ public class HotelBooking extends AppCompatActivity {
     DatabaseReference dbref;
     UserDetailForHotelReserv hotel;
     EditText name, email, days, room, phone;
-    String count = "100001";
-    String key,plc,x;
+//     String count = "1001";
+    SimpleDateFormat current = new SimpleDateFormat("ddMMyyyy");
+    Date today = new Date();
+    String day = current.format(today);
+
+    String key,plc,ans,x;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,10 +81,15 @@ public class HotelBooking extends AppCompatActivity {
         phone = findViewById(R.id.phone);
         days = findViewById(R.id.days);
         room = findViewById(R.id.rooms);
-
+//        ans = returnid();
         hotel = new UserDetailForHotelReserv();
+
         Intent place = getIntent();
         plc = place.getStringExtra("place");
+//        ans = place.getStringExtra("count");
+
+
+
     }
 
     @Override
@@ -102,6 +114,7 @@ public class HotelBooking extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+                dbref = FirebaseDatabase.getInstance().getReference().child("kandy").child("HotelUser");
                 dbref = FirebaseDatabase.getInstance().getReference().child(plc).child("HotelUser");
                 try {
                     if (TextUtils.isEmpty(name.getText().toString()))
@@ -120,21 +133,24 @@ public class HotelBooking extends AppCompatActivity {
                         hotel.setDays(days.getText().toString().trim());
                         hotel.setRooms(room.getText().toString().trim());
                         hotel.setPhone(Integer.parseInt(phone.getText().toString().trim()));
+//                        hotel.setCounter(ans);
 
-                          x = email.getText().toString().trim();
+                         x =  day + name.getText().toString().trim();
+                        x = email.getText().toString().trim();
                         dbref.child(x).setValue(hotel);
 
                         Toast.makeText(getApplicationContext(), "Hotel Booked..", Toast.LENGTH_LONG).show();
                         clearControls();
 
-                        String val = count;
+//                        String val = count;
 //                        key = dbref.child(val).push().getKey();
 //                        Log.i("Value is ...........",key);
 //                        System.out.print(key);
 
                         Intent intent = new Intent(HotelBooking.this, HotelBookingConfirm.class);
                         intent.putExtra("userObject",x);
-                        intent.putExtra("place",plc);
+                        intent.putExtra("email",email.getText().toString());
+                        intent.putExtra("name",name.getText().toString());
                         startActivity(intent);
                     }
 
@@ -153,10 +169,12 @@ public class HotelBooking extends AppCompatActivity {
         phone.setText("");
     }
 
-    public String returnid() {
+//    public String returnid() {
+//
+//        count = String.valueOf(Integer.valueOf(count) + 1);
+//
+//        return count;
+//    }
 
-        count = String.valueOf(Integer.valueOf(count) + 1);
 
-        return count;
-    }
 }

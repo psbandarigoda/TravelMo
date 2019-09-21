@@ -24,6 +24,7 @@ public class HotelBookingDetailEdit extends AppCompatActivity {
     DatabaseReference dref;
     UserDetailForHotelReserv hotel;
     String chiId;
+    String pasindu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

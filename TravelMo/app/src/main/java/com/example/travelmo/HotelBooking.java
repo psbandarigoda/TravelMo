@@ -45,7 +45,7 @@ public class HotelBooking extends AppCompatActivity {
     SimpleDateFormat current = new SimpleDateFormat("ddMMyyyy");
     Date today = new Date();
     String day = current.format(today);
-
+    String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
     String key,plc,ans,x;
 
     @Override
@@ -121,6 +121,8 @@ public class HotelBooking extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(), "Please Enter Name", Toast.LENGTH_LONG).show();
                     else if (TextUtils.isEmpty(email.getText().toString()))
                         Toast.makeText(getApplicationContext(), "Please Enter E-Mail", Toast.LENGTH_LONG).show();
+                    else if(!(email.getText().toString()).matches(emailPattern))
+                        Toast.makeText(getApplicationContext(), "invalide E-Mail", Toast.LENGTH_LONG).show();
                     else if (TextUtils.isEmpty(room.getText().toString()))
                         Toast.makeText(getApplicationContext(), "Please Enter No Of Rooms", Toast.LENGTH_LONG).show();
                     else if (TextUtils.isEmpty(phone.getText().toString()))

@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -28,6 +29,7 @@ public class GuideBookingDetailEdit extends AppCompatActivity {
     EditText uName, uEmail, uday, uRoom, uPhone;
     DatabaseReference dref;
     UserDetailForGuideReserv guide;
+    String vehicleName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +64,22 @@ public class GuideBookingDetailEdit extends AppCompatActivity {
         ArrayAdapter<String> dataAdaptor = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, categories);
         dataAdaptor.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(dataAdaptor);
+
+
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+                vehicleName = adapterView.getItemAtPosition(i).toString();
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
     }
 
     @Override
@@ -80,7 +98,7 @@ public class GuideBookingDetailEdit extends AppCompatActivity {
                             try {
                                 guide.setName(uName.getText().toString().trim());
                                 guide.setEmail(value);
-//                                guide.setRooms(uRoom.getText().toString().trim());
+                                guide.setVehicle(vehicleName.trim());
                                 guide.setDays(uday.getText().toString().trim());
                                 guide.setPhoneNumber(Integer.parseInt(uPhone.getText().toString().trim()));
 

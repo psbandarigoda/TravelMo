@@ -25,17 +25,10 @@ public class HotelBookingConfirm extends AppCompatActivity {
     Button confirm;
     Button cancel;
     TextView name11, email, phone, room, day;
-    DatabaseReference dbref;
 
     String value,mai,place,name;
 
-
-    ArrayList hot;
     DatabaseReference dref;
-
-    ArrayList<UserDetailForHotelReserv> products;
-    DatabaseReference productsRef;
-    DatabaseReference mDatabase;
 
 
     @Override

@@ -34,7 +34,7 @@ public class HotelBookingDetailEdit extends AppCompatActivity {
         cancel = findViewById(R.id.cans);
 
         uName = findViewById(R.id.uname);
-
+        uEmail= findViewById(R.id.umail);
         uRoom = findViewById(R.id.urooms);
         uday = findViewById(R.id.udays);
         uPhone = findViewById(R.id.uphone);
@@ -61,7 +61,7 @@ public class HotelBookingDetailEdit extends AppCompatActivity {
                         if(dataSnapshot.hasChild(value)){
                             try {
                                 hotel.setName(uName.getText().toString().trim());
-                                hotel.setEmail(value);
+                                hotel.setEmail(uEmail.getText().toString().trim());
                                 hotel.setRooms(uRoom.getText().toString().trim());
                                 hotel.setDays(uday.getText().toString().trim());
                                 hotel.setPhone(Integer.parseInt(uPhone.getText().toString().trim()));
@@ -69,7 +69,8 @@ public class HotelBookingDetailEdit extends AppCompatActivity {
                                 dref = FirebaseDatabase.getInstance().getReference().child(place).child("HotelUser").child(value) ;
                                 dref.setValue(hotel);
                                 Toast.makeText(getApplicationContext(),"Updated",Toast.LENGTH_LONG).show();
-
+                                cancel.setEnabled(true);
+                                cancel.setAlpha(1.0f);
                             }catch (NumberFormatException e){
                                 Toast.makeText(getApplicationContext(),"Invalid Contact No",Toast.LENGTH_LONG).show();
 
@@ -95,9 +96,8 @@ public class HotelBookingDetailEdit extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                sendHotelMail();
-//                Intent intent = new Intent(HotelBookingDetailEdit.this,HotelUsers.class);
-//                startActivity(intent);
+//                sendHotelMail();
+
             }
         });
     }

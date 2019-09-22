@@ -6,9 +6,21 @@ public class GuideModel {
     private String txtEmail;
     private int txtCon;
     private String txtDes;
+    private String txtNic;
 
 
     public GuideModel() {
+    }
+
+    public GuideModel(String txtName, String txtAge, String txtEmail, int txtCon, String txtDes, String txtNic) {
+
+        this.txtName = txtName;
+        this.txtAge = txtAge;
+        this.txtEmail = txtEmail;
+        this.txtCon = txtCon;
+        this.txtDes = txtDes;
+        this.txtNic = txtNic;
+
     }
 
     public String getTxtName() {
@@ -50,4 +62,13 @@ public class GuideModel {
     public void setTxtDes(String txtDes) {
         this.txtDes = txtDes;
     }
+
+    public String getTxtNic() {
+        return txtNic;
+    }
+
+    public void setTxtNic(String txtNic) {
+        this.txtNic = txtNic;
+    }
+
 }

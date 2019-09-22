@@ -15,7 +15,7 @@ public class AddHotelGuide extends AppCompatActivity {
     }
 
     public void guide(View v) {
-        Intent intent = new Intent(this, DelUpdateActivity.class);
+        Intent intent = new Intent(this, ViewGuide.class);
         startActivity(intent);
     }
 

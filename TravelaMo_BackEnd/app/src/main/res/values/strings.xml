@@ -29,6 +29,7 @@
     <string name="email"></string>
     <string name="description"></string>
     <string name="vehicle"></string>
+    <string name="nic"></string>
     <string name="addguide">ADD</string>
     <string name="update">update</string>
     <string name="delete">delete</string>
@@ -39,14 +40,21 @@
     <string name="all_list">Hotels and Guides List</string>
     <string name="guide_list">Guides List</string>
     <string name="guide_Btn">ADD GUIDE</string>
+    <string name="txt_image">CHOOSE IMAGE</string>
+    <string name="uploadbtn">upload</string>
+    <string name="viewUploads">View Uploads</string>
+    <string name="viewName">Name</string>
 
     <string name="topic_guide">Add a Guide</string>
+    <string name="topic">Guide</string>
+    <string name="gUpdate">Update</string>
     <string name="gtxt_name">Full Name</string>
     <string name="gtxt_phone">Contact Number</string>
     <string name="gtxt_email">Email</string>
     <string name="gtxt_age">Age</string>
     <string name="gtxt_desc">Description</string>
     <string name="gtxt_vehicle">Vehicle Type</string>
+    <string name="gtxt_nic">NIC</string>
 
     <string name="topic_hotel">Add a Hotel</string>
     <string name="htxt_name">Hotel Name</string>
@@ -85,8 +93,6 @@
         <item>Leyland Bus</item>
         <item>Vanatte</item>
     </string-array>
-
-
 
 
 </resources>

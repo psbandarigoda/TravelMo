@@ -15,6 +15,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -25,122 +27,76 @@ import java.util.ArrayList;
 
 public class DelUpdateActivity extends AppCompatActivity {
 
-//    TextView txtName1,txtEmail1,txtAge1,txtCon1,txtDes1;//spinnerVehicle;
-//    Button updatebtn, deletebtn;
-//    GuideModel guide;
-//    String value;
-    ListView listView;
-    DatabaseReference dbRef;
-    FirebaseDatabase database;
-    ArrayList list;
-    ArrayAdapter<String> adapter;
+    EditText editName,editAge,editDes,editCon,editEmail,editNic;
+    //DatabaseReference dbref;
+    Button UpdateBtn;
     GuideModel guide;
-    Button guideBtn;
+    String value;
+    FirebaseDatabase database;
+
+
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+   protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_del_update);
 
-        guideBtn = findViewById(R.id.guideBtn);
-        listView = (ListView)findViewById(R.id.listView);
-        database = FirebaseDatabase.getInstance();
-        dbRef = database.getReference("kandy").child("ClientGuide");
-        list = new ArrayList<>();
-        adapter = new ArrayAdapter<String>(this,R.layout.guide_info,R.id.guide_info,list);
+        //database = FirebaseDatabase.getInstance();
+
+        editName = (EditText)findViewById(R.id.editName);
+        editAge = (EditText)findViewById(R.id.editAge);
+        editDes = (EditText)findViewById(R.id.editDes);
+        editCon = (EditText)findViewById(R.id.editCon);
+        editEmail = (EditText)findViewById(R.id.editEmail);
+        editNic = (EditText)findViewById(R.id.editNic);
+        UpdateBtn = (Button)findViewById(R.id.UpdateBtn);
+
+        editName.setText(getIntent().getStringExtra("name"));
+        editAge.setText(getIntent().getStringExtra("age"));
+        editDes.setText(getIntent().getStringExtra("des"));
+        editCon.setText(getIntent().getStringExtra("con"));
+        editEmail.setText(getIntent().getStringExtra("email"));
+        editNic.setText(getIntent().getStringExtra("nic"));
+
         guide = new GuideModel();
 
+       Intent nic = getIntent();
+       value = nic.getStringExtra("userObject");
 
-        dbRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (DataSnapshot ds:dataSnapshot.getChildren()){
-                    guide = ds.getValue(GuideModel.class);
-                    list.add(guide.getTxtName().toString()  +" \n " +guide.getTxtCon() + " \n "
-                            +guide.getTxtAge().toString() + " \n " +guide.getTxtDes().toString() + " \n " + guide.getTxtEmail().toString() );
+       // dbref = FirebaseDatabase.getInstance().getReference("kandy").child("ClientGuide");
 
-                }
-                listView.setAdapter(adapter);
-
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-
-
-//        txtName1 = findViewById(R.id.txtName1);
-//        txtDes1 = findViewById(R.id.txtDes1);
-//        txtAge1 = findViewById(R.id.txtAge1);
-//        txtCon1 = findViewById(R.id.txtCon1);
-//        txtEmail1 = findViewById(R.id.txtEmail1);
-//        //spinnerVehicle = findViewById(R.id.spinnerVehicle);
-//        updatebtn = findViewById(R.id.updatebtn);
-//        deletebtn = findViewById(R.id.deletebtn);
-//       // value = txtName.getText().toString();
-
-
-//        DatabaseReference readRef = FirebaseDatabase.getInstance().getReference().child("Guide").child(value);
-//        readRef.addListenerForSingleValueEvent(new ValueEventListener() {
-//
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                if (dataSnapshot.hasChildren()) {
-//                    txtName1.setText(dataSnapshot.child("name").getValue().toString());
-//                    txtDes1.setText(dataSnapshot.child("desc").getValue().toString());
-//                    txtEmail1.setText(dataSnapshot.child("email").getValue().toString());
-//                    txtAge1.setText(dataSnapshot.child("age").getValue().toString());
-//                    txtCon1.setText(dataSnapshot.child("phone").getValue().toString());
-//
-//
-//                } else {
-//                    Toast.makeText(getApplicationContext(), "No Values to retrieve", Toast.LENGTH_LONG).show();
-//
-//                }
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError databaseError) {
-//
-//            }
-//        });
-
-
-
-
-//
-//        updatebtn.setOnClickListener(new View.OnClickListener() {
+       
+//       UpdateBtn.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View view) {
-//                DatabaseReference upRef = FirebaseDatabase.getInstance().getReference().child("Guide");
+//                DatabaseReference upRef = FirebaseDatabase.getInstance().getReference().child("kandy").child("ClientGuide");
 //                upRef.addListenerForSingleValueEvent(new ValueEventListener() {
 //                    @Override
 //                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 //                        if (dataSnapshot.hasChild(value)){
 //                            try {
-//                                guide.setTxtName(txtName1.getText().toString().trim());
-//                                guide.setTxtAge(txtAge1.getText().toString().trim());
-//                                guide.setTxtCon(Integer.parseInt(txtCon1.getText().toString().trim()));
-//                                guide.setTxtEmail(txtEmail1.getText().toString().trim());
-//                                guide.setTxtDes(txtDes1.getText().toString().trim());
+//                                guide.setTxtName(editName.getText().toString().trim());
+//                                guide.setTxtAge(editAge.getText().toString().trim());
+//                                guide.setTxtCon(Integer.parseInt(editCon.getText().toString().trim()));
+//                                guide.setTxtEmail(editEmail.getText().toString().trim());
+//                                guide.setTxtDes(editDes.getText().toString().trim());
+//                                guide.setTxtNic(editNic.getText().toString().trim());
 //
-//                                dbRef = FirebaseDatabase.getInstance().getReference().child("Guide").child(value);
+//                                dbRef = FirebaseDatabase.getInstance().getReference().child("kandy").child("ClientGuide").child(value);
 //                                dbRef.setValue(guide);
-//                               //clearControls();
 //
 //                                Toast.makeText(getApplicationContext(),"Data Updated successfully",Toast.LENGTH_SHORT).show();
 //
-//                                Intent intent = new Intent(DelUpdateActivity.this,DelUpdateActivity.class);
-//                                startActivity(intent);
+//
 //                            }
 //                            catch (NumberFormatException e){
 //                                Toast.makeText(getApplicationContext(),"Invalid Contact Number",Toast.LENGTH_SHORT).show();
 //                            }
-//
+//                            Intent intent = new Intent(DelUpdateActivity.this,View.class);
+//                            startActivity(intent);
 //                        }
+//
+//
 //                        else
 //                            Toast.makeText(getApplicationContext(),"No source to Update",Toast.LENGTH_SHORT).show();
 //                    }
@@ -152,42 +108,10 @@ public class DelUpdateActivity extends AppCompatActivity {
 //                });
 //            }
 //        });
-//
-//
-//        deletebtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                DatabaseReference delRef = FirebaseDatabase.getInstance().getReference().child("Guide");
-//                delRef.addListenerForSingleValueEvent(new ValueEventListener() {
-//                    @Override
-//                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                        if (dataSnapshot.hasChild(value)){
-//                            dbRef = FirebaseDatabase.getInstance().getReference().child("Guide").child(value);
-//                            dbRef.removeValue();
-//                            //clearControls();
-//                            Toast.makeText(getApplicationContext(),"Guide deleted Successfully",Toast.LENGTH_SHORT).show();
-//
-//                        Intent intent = new Intent(DelUpdateActivity.this,DelUpdateActivity.class);
-//                        startActivity(intent);
-//
-//
-//                        }
-//                        else
-//                            Toast.makeText(getApplicationContext(),"No Guide to delete",Toast.LENGTH_SHORT).show();
-//                    }
-//
-//                    @Override
-//                    public void onCancelled(@NonNull DatabaseError databaseError) {
-//
-//                    }
-//                });
-//            }
-//        });
+
+
+
    }
-    public void guideBtn(View v) {
-        Intent intent = new Intent(this, AddActivity.class);
-        startActivity(intent);
-    }
 
 
 }

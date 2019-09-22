@@ -98,6 +98,7 @@ public class HotelUsers extends AppCompatActivity {
          ulist = new ArrayList<>();
 
         dref = FirebaseDatabase.getInstance().getReference("kandy").child("ClientHotel");
+        dref = FirebaseDatabase.getInstance().getReference(place).child("ClientHotel");
 
         dref.addValueEventListener(new ValueEventListener() {
             @Override

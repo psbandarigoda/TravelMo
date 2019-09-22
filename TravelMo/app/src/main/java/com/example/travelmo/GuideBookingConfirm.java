@@ -27,7 +27,7 @@ public class GuideBookingConfirm extends AppCompatActivity {
     Button cancel;
     TextView txt_name, txt_mail, txt_days, txt_vehicle, txt_phoneNumber;
     DatabaseReference dbRef;
-    String value, place;
+    String value, place, email;
 
 
     @Override
@@ -48,6 +48,9 @@ public class GuideBookingConfirm extends AppCompatActivity {
         Intent id = getIntent();
         value = id.getStringExtra("userObject");
         place = id.getStringExtra("place");
+
+        Intent emails = getIntent();
+        email = emails.getStringExtra("email");
 
 
         DatabaseReference dbref = FirebaseDatabase.getInstance().getReference().child(place).child("GuideReceiveUser").child(value);
@@ -139,7 +142,7 @@ public class GuideBookingConfirm extends AppCompatActivity {
 
 
     private void sendMail() {
-        String recipientList = txt_mail.getText().toString();
+        String recipientList = email;
         String[] recipient = recipientList.split(",");
         String subject = "TravelMo Guid Booking Service";
         String message = "TravelMo(pvt)ltd Guid Booking Service " +

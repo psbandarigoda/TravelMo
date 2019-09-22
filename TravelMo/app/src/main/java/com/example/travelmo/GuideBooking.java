@@ -45,7 +45,7 @@ public class GuideBooking extends AppCompatActivity {
     UserDetailForGuideReserv detailForGuideReserv;
     DatabaseReference dbRef;
     int count = 111111;
-    String plc, x;
+    String plc,x,email;
     SimpleDateFormat currentDate = new SimpleDateFormat("ddMMyyyy");
     Date todayDate = new Date();
     String thisDate = currentDate.format(todayDate);
@@ -82,12 +82,12 @@ public class GuideBooking extends AppCompatActivity {
         Spinner spinner = (Spinner) findViewById(R.id.spinnerVehicle);
 
         List<String> categories = new ArrayList<String>();
-        categories.add("Hiace");
-        categories.add("maco-polo");
-        categories.add("KHD");
-        categories.add("Vanatte");
-        categories.add("Dolphin");
-        categories.add("Laylend Bus");
+        categories.add("Micro");
+        categories.add("Mini");
+        categories.add("Car");
+        categories.add("Minivan");
+        categories.add("Van");
+        categories.add("VIP");
         ArrayAdapter<String> dataAdaptor = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, categories);
         dataAdaptor.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(dataAdaptor);
@@ -116,6 +116,9 @@ public class GuideBooking extends AppCompatActivity {
 
         Intent place = getIntent();
         plc = place.getStringExtra("place");
+
+        Intent gid = getIntent();
+        email = gid.getStringExtra("email");
 
         detailForGuideReserv = new UserDetailForGuideReserv();
 
@@ -169,6 +172,7 @@ public class GuideBooking extends AppCompatActivity {
                         Intent intent = new Intent(GuideBooking.this, GuideBookingConfirm.class);
                         intent.putExtra("userObject", x);
                         intent.putExtra("place", plc);
+                        intent.putExtra("email", email);
                         startActivity(intent);
                     }
 

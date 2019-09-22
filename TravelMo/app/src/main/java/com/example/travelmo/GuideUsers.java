@@ -35,8 +35,8 @@ public class GuideUsers extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
 
-    Button search;
-    TextView textViewName, textViewDes;
+    Button search,search2;
+    TextView textViewName, textViewDes, textViewEmail, textViewContact;
     String valueDis;
     String valueChoice;
     DatabaseReference dbRef;
@@ -81,6 +81,8 @@ public class GuideUsers extends AppCompatActivity {
 
         textViewName = findViewById(R.id.textViewName);
         textViewDes = findViewById(R.id.textViewDes);
+        textViewEmail = findViewById(R.id.textViewEmail);
+        textViewContact = findViewById(R.id.textViewContact);
 
         Intent gid = getIntent();
         place = gid.getStringExtra("district");
@@ -95,6 +97,8 @@ public class GuideUsers extends AppCompatActivity {
                     //System.out.println(dataSnapshot.child("id").getValue().toString());
                     textViewName.setText(dataSnapshot.child("name").getValue().toString());
                     textViewDes.setText(dataSnapshot.child("description").getValue().toString());
+                    textViewEmail.setText(dataSnapshot.child("email").getValue().toString());
+                    textViewContact.setText(dataSnapshot.child("phoneNumber").getValue().toString());
 
                 } else {
                     System.out.println("no Children");
@@ -110,6 +114,7 @@ public class GuideUsers extends AppCompatActivity {
         });
 
         search = findViewById(R.id.btnSearch);
+        search2 = findViewById(R.id.btnSearch2);
     }
 
     @Override
@@ -135,6 +140,17 @@ public class GuideUsers extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(GuideUsers.this, GuideBooking.class);
                 intent.putExtra("place", place);
+                intent.putExtra("email","bgpsandaruwan@gmail.com");
+                startActivity(intent);
+            }
+        });
+
+        search2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(GuideUsers.this, GuideBooking.class);
+                intent.putExtra("place", place);
+                intent.putExtra("email","sandaruwan@gmail.com");
                 startActivity(intent);
             }
         });

@@ -42,7 +42,7 @@ public class GuideBookingDetailEdit extends AppCompatActivity {
         confirm.setAlpha(0.5f);
 
         uName = findViewById(R.id.editTextName);
-        //uEmail = findViewById(R.id.editTextEmail);
+        uEmail = findViewById(R.id.editTextEmail);
         uday = findViewById(R.id.editTextDays);
         uPhone = findViewById(R.id.editTextPhone);
 
@@ -55,12 +55,12 @@ public class GuideBookingDetailEdit extends AppCompatActivity {
         Spinner spinner = (Spinner) findViewById(R.id.spinnerVehicle);
 
         List<String> categories = new ArrayList<String>();
-        categories.add("Hiace");
-        categories.add("maco-polo");
-        categories.add("KHD");
-        categories.add("Vanatte");
-        categories.add("Dolphin");
-        categories.add("Laylend Bus");
+        categories.add("Micro");
+        categories.add("Mini");
+        categories.add("Car");
+        categories.add("Minivan");
+        categories.add("Van");
+        categories.add("VIP");
         ArrayAdapter<String> dataAdaptor = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, categories);
         dataAdaptor.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(dataAdaptor);
@@ -97,7 +97,7 @@ public class GuideBookingDetailEdit extends AppCompatActivity {
                         if (dataSnapshot.hasChild(value)) {
                             try {
                                 guide.setName(uName.getText().toString().trim());
-                                guide.setEmail(value);
+                                guide.setEmail(uEmail.getText().toString().trim());
                                 guide.setVehicle(vehicleName.trim());
                                 guide.setDays(uday.getText().toString().trim());
                                 guide.setPhoneNumber(Integer.parseInt(uPhone.getText().toString().trim()));

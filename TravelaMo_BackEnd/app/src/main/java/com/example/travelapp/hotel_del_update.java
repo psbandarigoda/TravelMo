@@ -23,5 +23,7 @@ public class hotel_del_update extends AppCompatActivity {
         Intent intent = new Intent(this, add_hotel.class);
         startActivity(intent);
     }
+
+
    
 }

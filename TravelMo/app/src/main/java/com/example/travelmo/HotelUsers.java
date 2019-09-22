@@ -6,28 +6,55 @@ import android.os.Bundle;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
+import android.util.Log;
 import android.view.View;
 
+import androidx.annotation.NonNull;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.Menu;
 import android.widget.Button;
+import android.widget.ProgressBar;
+import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 public class HotelUsers extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
 
     Button search;
+    String place;
+    String count = "1001";
+
+    static String distr ;
+
+    private RecyclerView recycler ;
+   private ImageAdapter imageAdapter;
+
+    private DatabaseReference dref;
+   List ulist;
+    ProgressBar pro;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,12 +79,57 @@ public class HotelUsers extends AppCompatActivity {
                 R.id.nav_tools, R.id.nav_share, R.id.nav_send)
                 .setDrawerLayout(drawer)
                 .build();
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-        NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
-        NavigationUI.setupWithNavController(navigationView, navController);
+//        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+//        NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
+//        NavigationUI.setupWithNavController(navigationView, navController);
 
-        search = findViewById(R.id.search2);
+//        search = findViewById(R.id.search2);
+
+
+        Intent id = getIntent();
+        place = id.getStringExtra("district");
+        distr = place;
+
+        recycler = findViewById(R.id.recycle);
+        recycler.setHasFixedSize(true);
+
+        pro = findViewById(R.id.progress);
+        recycler.setLayoutManager(new LinearLayoutManager(this));
+         ulist = new ArrayList<>();
+
+        dref = FirebaseDatabase.getInstance().getReference("kandy").child("ClientHotel");
+
+        dref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for(DataSnapshot postSnapshot : dataSnapshot.getChildren()){
+//                   Kandy kandy = postSnapshot.getValue(Kandy.class);
+//                    ulist.add(kandy);
+
+                    Map<String, Object> map = (Map<String, Object>) dataSnapshot.getValue();
+
+                    String user = postSnapshot.getKey();
+//                    String score = postSnapshot.getValue(String.class);
+                    Kandy kan = new Kandy(user,map);
+                    ulist.add(kan);
+
+                }
+
+                imageAdapter = new ImageAdapter(HotelUsers.this,ulist);
+                recycler.setAdapter(imageAdapter);
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Toast.makeText(HotelUsers.this,databaseError.getMessage(),Toast.LENGTH_LONG).show();
+
+            }
+        });
+
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -77,12 +149,21 @@ public class HotelUsers extends AppCompatActivity {
     protected void onResume(){
         super.onResume();
 
-        search.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(HotelUsers.this,HotelBooking.class);
-                startActivity(intent);
-            }
-        });
+//        search.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(HotelUsers.this,HotelBooking.class);
+//                intent.putExtra("place",place);
+////                intent.putExtra("count",returnid());
+//                startActivity(intent);
+//            }
+//        });
     }
+//
+//    public String returnid() {
+//
+//        count = String.valueOf(Integer.valueOf(count) + 1);
+//
+//        return count;
+//    }
 }

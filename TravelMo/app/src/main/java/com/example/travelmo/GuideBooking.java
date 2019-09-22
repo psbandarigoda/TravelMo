@@ -30,7 +30,9 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class GuideBooking extends AppCompatActivity {
@@ -41,6 +43,11 @@ public class GuideBooking extends AppCompatActivity {
     EditText Text_Name, Text_Email, Text_Days, Text_Phone;
     UserDetailForGuideReserv detailForGuideReserv;
     DatabaseReference dbRef;
+    int count = 111111;
+    String plc, x;
+    SimpleDateFormat currentDate = new SimpleDateFormat("ddMMyyyy");
+    Date todayDate = new Date();
+    String thisDate = currentDate.format(todayDate);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,26 +94,13 @@ public class GuideBooking extends AppCompatActivity {
         Text_Days = findViewById(R.id.editTextDays);
         Text_Phone = findViewById(R.id.editTextPhone);
 
-        conform = findViewById(R.id.conform);
+        conform = findViewById(R.id.btnNext);
+
+        Intent place = getIntent();
+        plc = place.getStringExtra("place");
 
         detailForGuideReserv = new UserDetailForGuideReserv();
 
-//        conform.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                dbRef = FirebaseDatabase.getInstance().getReference().child("GuideReceiveUser");
-//                detailForGuideReserv.setName(Text_Name.getText().toString().trim());
-//                detailForGuideReserv.setEmail(Text_Email.getText().toString().trim());
-//                detailForGuideReserv.setDays(Text_Days.getText().toString().trim());
-//                detailForGuideReserv.setPhoneNumber(Integer.parseInt(Text_Phone.getText().toString().trim()));
-//
-//                dbRef.child("IT001").setValue(detailForGuideReserv);
-//                Toast.makeText(getApplicationContext(),"Adding Success",Toast.LENGTH_LONG).show();
-//
-//                Intent intent = new Intent(GuideBooking.this,GuideBookingConfirm.class);
-//                startActivity(intent);
-//            }
-//        });
     }
 
     @Override
@@ -130,7 +124,7 @@ public class GuideBooking extends AppCompatActivity {
         conform.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                dbRef = FirebaseDatabase.getInstance().getReference().child("GuideReceiveUser");
+                dbRef = FirebaseDatabase.getInstance().getReference().child(plc).child("GuideReceiveUser");
                 try {
                     if (TextUtils.isEmpty(Text_Name.getText().toString()))
                         Toast.makeText(getApplicationContext(), "Please Enter Name", Toast.LENGTH_LONG).show();
@@ -144,14 +138,20 @@ public class GuideBooking extends AppCompatActivity {
                         detailForGuideReserv.setName(Text_Name.getText().toString().trim());
                         detailForGuideReserv.setEmail(Text_Email.getText().toString().trim());
                         detailForGuideReserv.setDays(Text_Days.getText().toString().trim());
-                        detailForGuideReserv.setVehicle(Text_Phone.getText().toString().trim());
-                        //detailForGuideReserv.setPhoneNumber(Integer.parseInt(phone.getText().toString().trim()));
+//                        detailForGuideReserv.setVehicle(Text_Phone.getText().toString().trim());
+                        detailForGuideReserv.setPhoneNumber(Integer.parseInt(Text_Phone.getText().toString().trim()));
 
-                        dbRef.push().setValue(detailForGuideReserv);
-                        Toast.makeText(getApplicationContext(), "Guide Booked..", Toast.LENGTH_LONG).show();
+                        x = thisDate + Text_Name.getText().toString().trim();
+                        dbRef.child(x).setValue(detailForGuideReserv);
+
+                        Toast.makeText(getApplicationContext(), "Guide Booking..", Toast.LENGTH_LONG).show();
                         clearControls();
 
+//                        count = count +1;
+
                         Intent intent = new Intent(GuideBooking.this, GuideBookingConfirm.class);
+                        intent.putExtra("userObject", x);
+                        intent.putExtra("place", plc);
                         startActivity(intent);
                     }
 
@@ -160,6 +160,8 @@ public class GuideBooking extends AppCompatActivity {
                 }
             }
         });
+
+//        count = count + +1;
     }
 
     private void clearControls() {
@@ -169,5 +171,11 @@ public class GuideBooking extends AppCompatActivity {
         //room.setText("");
         Text_Phone.setText("");
     }
+
+//    public String returnid() {
+//
+//        count = String.valueOf(Integer.valueOf(count) + 1);
+//        return count;
+//    }
 
 }

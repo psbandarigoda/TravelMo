@@ -14,7 +14,9 @@ import android.widget.Button;
 
 public class Places extends AppCompatActivity {
 
-    Button place;
+    Button kandy, galle, rathnapura, nuwaraeliya, anuradapura, jaffna, matara;
+//    String kandyname;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,20 +34,35 @@ public class Places extends AppCompatActivity {
             }
         });
 
-        place = findViewById(R.id.kandy1);
+        kandy = findViewById(R.id.kandy1);
+        galle = findViewById(R.id.galle);
     }
 
     @Override
-    protected void onResume(){
+    protected void onResume() {
         super.onResume();
 
-        place.setOnClickListener(new View.OnClickListener() {
+        kandy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent intent = new Intent(Places.this, UserChoice.class);
+                intent.putExtra("district","kandy");
+                startActivity(intent);
+            }
+        });
 
-                Intent intent = new Intent(Places.this,UserChoice.class);
+        galle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Places.this, UserChoice.class);
+                intent.putExtra("district","galle");
                 startActivity(intent);
             }
         });
     }
+
+//    public String returnkandy() {
+//        kandyname = String.valueOf(String.valueOf(kandy));
+//        return kandyname;
+//    }
 }

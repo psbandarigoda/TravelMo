@@ -137,6 +137,24 @@
             android:textColor="@color/colorSecondaryText" />
 
         <Button
+            android:id="@+id/select_photobtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/select_photo" />
+
+        <ImageView
+            android:id="@+id/showhotelphoto_img"
+            android:layout_width="match_parent"
+            android:layout_height="281dp"
+            tools:srcCompat="@tools:sample/backgrounds/scenic[1]" />
+
+        <Button
+            android:id="@+id/upload_photobtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/upload_photo" />
+
+        <Button
             android:id="@+id/addHotel_btn"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
@@ -144,7 +162,6 @@
             android:layout_marginTop="15dp"
             android:layout_marginBottom="5dp"
             android:background="@drawable/gradient"
-            android:onClick="add_hotel1"
             android:shadowColor="@color/colorText"
             android:text="@string/addguide"
             android:textColor="@color/colorText"

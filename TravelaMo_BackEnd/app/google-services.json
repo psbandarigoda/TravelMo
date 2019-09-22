@@ -1,21 +1,21 @@
 {
   "project_info": {
-    "project_number": "665394461802",
-    "firebase_url": "https://travelamobackend.firebaseio.com",
-    "project_id": "travelamobackend",
-    "storage_bucket": "travelamobackend.appspot.com"
+    "project_number": "1067644862859",
+    "firebase_url": "https://travelmo-df714.firebaseio.com",
+    "project_id": "travelmo-df714",
+    "storage_bucket": "travelmo-df714.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:665394461802:android:eaebf2c30a85680e5b5e13",
+        "mobilesdk_app_id": "1:1067644862859:android:12a10cbcd0ad539e5a6f8e",
         "android_client_info": {
           "package_name": "com.example.travelapp"
         }
       },
       "oauth_client": [
         {
-          "client_id": "665394461802-huguiu1f6kp9r49ea7tp4uak1i6ar8cm.apps.googleusercontent.com",
+          "client_id": "1067644862859-ts63cgv7jc4m6391u16vjsm0m0qnojc7.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.example.travelapp",
@@ -23,20 +23,73 @@
           }
         },
         {
-          "client_id": "665394461802-kmk9tl3jag38uhqg87g080q0un3v4kls.apps.googleusercontent.com",
+          "client_id": "1067644862859-3sfbqiks8nj4via44njrko5t4bf2v2vg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.travelapp",
+            "certificate_hash": "a4cadfb0f0fc5688d168bcfd828a2820c6f05119"
+          }
+        },
+        {
+          "client_id": "1067644862859-8fb38bgdem1fg39tkptrcg5uvaurvtjk.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAqsPHlmvpJYZ9Z67FYCHAGUEKCbDU5Jpo"
+          "current_key": "AIzaSyC1354ejp0Fuz4-KPtGhUXzPR7-XumSsNc"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "665394461802-kmk9tl3jag38uhqg87g080q0un3v4kls.apps.googleusercontent.com",
+              "client_id": "1067644862859-8fb38bgdem1fg39tkptrcg5uvaurvtjk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1067644862859:android:3478ef9d3d67fa075a6f8e",
+        "android_client_info": {
+          "package_name": "com.example.travelmo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1067644862859-98vqs5ccf9m8as3u0hpmcshrih5puccm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.travelmo",
+            "certificate_hash": "60dd67dfbfae60099dd33dbc89ac5b54d007e2c6"
+          }
+        },
+        {
+          "client_id": "1067644862859-kdgcetij9q7em6a95m9jg690p4lufet6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.travelmo",
+            "certificate_hash": "c7f8355ab92fdeeef0eefe388f94d16076561c1f"
+          }
+        },
+        {
+          "client_id": "1067644862859-8fb38bgdem1fg39tkptrcg5uvaurvtjk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC1354ejp0Fuz4-KPtGhUXzPR7-XumSsNc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1067644862859-8fb38bgdem1fg39tkptrcg5uvaurvtjk.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

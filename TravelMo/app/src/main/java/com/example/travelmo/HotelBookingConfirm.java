@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -11,133 +12,113 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.FirebaseError;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.ArrayList;
+public class GuideBookingConfirm extends AppCompatActivity {
 
-public class HotelBookingConfirm extends AppCompatActivity {
-
-    Button edit;
-    Button confirm;
+    Button editDtl;
+    Button confirmDtl;
     Button cancel;
-    TextView name11, email, phone, room, day;
-
-    String value,mai,place,name;
-
-    DatabaseReference dref;
+    TextView txt_name, txt_mail, txt_days, txt_vehicle, txt_phoneNumber;
+    DatabaseReference dbRef;
+    String value, place, email;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_hotel_booking_confirm);
+        setContentView(R.layout.activity_guide_booking_confirm);
 
-        edit = findViewById(R.id.btnedit2);
-        confirm = findViewById(R.id.next);
-        cancel = findViewById(R.id.cancel);
+        editDtl = findViewById(R.id.btnedit2);
+        confirmDtl = findViewById(R.id.confirm);
+        cancel = findViewById(R.id.cancel112);
 
-        name11 = findViewById(R.id.name1);
-        email = findViewById(R.id.email1);
-        phone = findViewById(R.id.phone1);
-        room = findViewById(R.id.room1);
-        day = findViewById(R.id.days1);
+        txt_name = findViewById(R.id.textViewName);
+        txt_mail = findViewById(R.id.textViewEmail);
+        txt_days = findViewById(R.id.textViewDays);
+        txt_vehicle = findViewById(R.id.textViewVehicle);
+        txt_phoneNumber = findViewById(R.id.textViewPhoneNum);
 
         Intent id = getIntent();
         value = id.getStringExtra("userObject");
- 
         place = id.getStringExtra("place");
 
+        Intent emails = getIntent();
+        email = emails.getStringExtra("email");
 
-        DatabaseReference dbref = FirebaseDatabase.getInstance().getReference().child(place).child("HotelUser").child(value);
 
+        DatabaseReference dbref = FirebaseDatabase.getInstance().getReference().child(place).child("GuideReceiveUser").child(value);
         dbref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-
-                if (dataSnapshot.hasChildren()){
-                     name11.setText( dataSnapshot.child("name").getValue().toString());
-                     email.setText(dataSnapshot.child("email").getValue().toString());
-                     day.setText(dataSnapshot.child("days").getValue().toString());
-                     room.setText(dataSnapshot.child("rooms").getValue().toString());
-                     phone.setText(dataSnapshot.child("phone").getValue().toString());
-
-                     Toast.makeText(getApplicationContext(),"Your Details",Toast.LENGTH_LONG).show();
-                 }
-                else{
-                     Toast.makeText(getApplicationContext(),"No Details",Toast.LENGTH_LONG).show();
-                 }
-
                 if (dataSnapshot.hasChildren()) {
-                    name11.setText(dataSnapshot.child("name").getValue().toString());
-                    email.setText(dataSnapshot.child("email").getValue().toString());
-                    day.setText(dataSnapshot.child("days").getValue().toString());
-                    room.setText(dataSnapshot.child("rooms").getValue().toString());
-//                     phone.setText(dataSnapshot.child("phone").getValue().toString());
 
-                    Toast.makeText(getApplicationContext(), "Success!!!", Toast.LENGTH_LONG).show();
+                    txt_name.setText(dataSnapshot.child("name").getValue().toString());
+                    txt_mail.setText(dataSnapshot.child("email").getValue().toString());
+                    txt_days.setText(dataSnapshot.child("days").getValue().toString());
+                    txt_vehicle.setText(dataSnapshot.child("vehicle").getValue().toString());
+                    txt_phoneNumber.setText(dataSnapshot.child("phoneNumber").getValue().toString());
+
+                    Toast.makeText(getApplicationContext(), "Added", Toast.LENGTH_LONG).show();
+
                 } else {
-                    Toast.makeText(getApplicationContext(), "Not Success", Toast.LENGTH_LONG).show();
+                    System.out.println("no Children");
+                    Toast.makeText(getApplicationContext(), "No Values to retrive", Toast.LENGTH_LONG).show();
+
                 }
-
-
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
+
         });
 
     }
+
 
     @Override
     protected void onResume() {
         super.onResume();
 
-        edit.setOnClickListener(new View.OnClickListener() {
+        editDtl.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(HotelBookingConfirm.this, HotelBookingDetailEdit.class);
- 
+                Intent intent = new Intent(GuideBookingConfirm.this, GuideBookingDetailEdit.class);
                 intent.putExtra("id", value);
                 intent.putExtra("place", place);
-
                 startActivity(intent);
-
             }
         });
 
-        confirm.setOnClickListener(new View.OnClickListener() {
+
+        confirmDtl.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                sendHotelMail();
-                Toast.makeText(getApplicationContext(),"sending email",Toast.LENGTH_LONG).show();
-//                Intent intent = new Intent(HotelBookingConfirm.this, HotelUsers.class);
-//                startActivity(intent);
+                sendMail();
+                Toast.makeText(getApplicationContext(), "Email Sending", Toast.LENGTH_LONG).show();
             }
         });
+
 
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                dref = FirebaseDatabase.getInstance().getReference().child(place).child("HotelUser");
-                dref.addListenerForSingleValueEvent(new ValueEventListener() {
+                dbRef = FirebaseDatabase.getInstance().getReference().child(place).child("GuideReceiveUser");
+                dbRef.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         if (dataSnapshot.hasChild(value)) {
-
-                            dref = FirebaseDatabase.getInstance().getReference().child(place).child("HotelUser").child(value);
-
-
-
-                            dref.removeValue();
+                            dbRef = FirebaseDatabase.getInstance().getReference().child(place).child("GuideReceiveUser").child(value);
+                            dbRef.removeValue();
                             Toast.makeText(getApplicationContext(), "Deleted", Toast.LENGTH_LONG).show();
 
                         } else {
@@ -151,33 +132,30 @@ public class HotelBookingConfirm extends AppCompatActivity {
                     }
                 });
 
-
-                Intent intent = new Intent(HotelBookingConfirm.this, HotelUsers.class);
+                Intent intent = new Intent(GuideBookingConfirm.this, GuideUsers.class);
                 startActivity(intent);
             }
         });
     }
 
 
-    private void sendHotelMail(){
-        String recipient = email.getText().toString();
-        String[] rec= recipient.split(",");
-        String sender = "TravelMo Hotel Booking Service";
-        String message ="TravelMo: \n Name"+name;
+    private void sendMail() {
+        String recipientList = email;
+        String[] recipient = recipientList.split(",");
+        String subject = "TravelMo Guid Booking Service";
+        String message = "TravelMo(pvt)ltd Guid Booking Service " +
+                "\n\n I'm --CustomerName-- I want to Book --Count--days\n" +
+                "my contact number is --ContactNumber-- Can you please inform to this number.\n\n" +
+                "Best Regards.";
+
 
         Intent intent = new Intent(Intent.ACTION_SEND);
-        intent.putExtra(Intent.EXTRA_EMAIL,rec);
-        intent.putExtra(Intent.EXTRA_SUBJECT,sender);
-        intent.putExtra(Intent.EXTRA_TEXT,message);
+        intent.putExtra(Intent.EXTRA_EMAIL, recipient);
+        intent.putExtra(Intent.EXTRA_SUBJECT, subject);
+        intent.putExtra(Intent.EXTRA_TEXT, message);
 
-        intent.setType("message/123");
-        startActivity(Intent.createChooser(intent,"Choose service"));
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        finish();
+        intent.setType("message/rfc822");
+        startActivity(Intent.createChooser(intent, "Choose an Email Method"));
     }
 
 }

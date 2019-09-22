@@ -55,8 +55,7 @@ public class HotelBookingConfirm extends AppCompatActivity {
 
         Intent id = getIntent();
         value = id.getStringExtra("userObject");
-//        mai = id.getStringExtra("email");
-//        name = id.getStringExtra("name");
+ 
         place = id.getStringExtra("place");
 
 
@@ -101,16 +100,6 @@ public class HotelBookingConfirm extends AppCompatActivity {
             }
         });
 
-
-//        confirm.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                sendMail();
-//                Intent intent = new Intent(HotelBookingConfirm.this, HotelUsers.class);
-//                startActivity(intent);
-//            }
-//        });
-
     }
 
     @Override
@@ -121,10 +110,7 @@ public class HotelBookingConfirm extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(HotelBookingConfirm.this, HotelBookingDetailEdit.class);
-//
-//                intent.putExtra("id",value);
-//                intent.putExtra("email",mai);
-
+ 
                 intent.putExtra("id", value);
                 intent.putExtra("place", place);
 

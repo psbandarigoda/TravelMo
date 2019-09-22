@@ -79,12 +79,7 @@ public class HotelUsers extends AppCompatActivity {
                 R.id.nav_tools, R.id.nav_share, R.id.nav_send)
                 .setDrawerLayout(drawer)
                 .build();
-//        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-//        NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
-//        NavigationUI.setupWithNavController(navigationView, navController);
-
-//        search = findViewById(R.id.search2);
-
+ 
 
         Intent id = getIntent();
         place = id.getStringExtra("district");
@@ -103,13 +98,11 @@ public class HotelUsers extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for(DataSnapshot postSnapshot : dataSnapshot.getChildren()){
-//                   Kandy kandy = postSnapshot.getValue(Kandy.class);
-//                    ulist.add(kandy);
-
+ 
                     Map<String, Object> map = (Map<String, Object>) dataSnapshot.getValue();
 
                     String user = postSnapshot.getKey();
-//                    String score = postSnapshot.getValue(String.class);
+ 
                     Kandy kan = new Kandy(user,map);
                     ulist.add(kan);
 
@@ -149,21 +142,7 @@ public class HotelUsers extends AppCompatActivity {
     protected void onResume(){
         super.onResume();
 
-//        search.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent(HotelUsers.this,HotelBooking.class);
-//                intent.putExtra("place",place);
-////                intent.putExtra("count",returnid());
-//                startActivity(intent);
-//            }
-//        });
+ 
     }
-//
-//    public String returnid() {
-//
-//        count = String.valueOf(Integer.valueOf(count) + 1);
-//
-//        return count;
-//    }
+ 
 }

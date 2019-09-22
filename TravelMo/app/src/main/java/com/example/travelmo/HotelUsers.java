@@ -45,10 +45,10 @@ public class HotelUsers extends AppCompatActivity {
     String count = "1001";
 
     private RecyclerView recycler ;
-   private ImageAdapter imageAdapter;
+    private ImageAdapter imageAdapter;
 
     private DatabaseReference dref;
-   List ulist;
+    List ulist;
     ProgressBar pro;
 
 
@@ -85,10 +85,10 @@ public class HotelUsers extends AppCompatActivity {
         Intent id = getIntent();
         place = id.getStringExtra("district");
 
-        recycler = findViewById(R.id.recycle);
+        //recycler = findViewById(R.id.recycle);
         recycler.setHasFixedSize(true);
 
-        pro = findViewById(R.id.progress);
+       // pro = findViewById(R.id.progress);
         recycler.setLayoutManager(new LinearLayoutManager(this));
          ulist = new ArrayList<>();
 

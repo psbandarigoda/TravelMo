@@ -101,7 +101,7 @@
             tools:srcCompat="@drawable/rathna" />
 
             <Button
-                android:id="@+id/button3"
+                android:id="@+id/btnRathnapura"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:layout_marginLeft="0dp"
@@ -118,6 +118,31 @@
             android:layout_height="1dp"
             android:layout_marginTop="60dp"
             android:background="@color/colorDivider" />
+
+        <ImageView
+            android:id="@+id/jaffna"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_gravity="center"
+            android:scaleType="centerCrop"
+            android:src="@drawable/jaffna"
+            app:srcCompat="@color/colorAccent"
+            android:layout_marginTop="-63dp"
+            tools:srcCompat="@drawable/jaffna" />
+
+        <Button
+            android:id="@+id/btnJffna"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="-200dp"
+            android:alpha="0.5"
+            android:background="@color/colorPrimaryText"
+            android:textSize="25dp"
+            android:onClick="@string/jaffna"
+            android:text="@string/jaffna"
+            android:textColor="@color/colorText" />
+
 
 
     </LinearLayout>

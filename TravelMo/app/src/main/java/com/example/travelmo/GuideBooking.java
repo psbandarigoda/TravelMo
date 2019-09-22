@@ -7,7 +7,6 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
 import android.text.TextUtils;
-import android.util.Patterns;
 import android.view.View;
 
 import androidx.navigation.NavController;
@@ -25,7 +24,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.view.Menu;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -50,9 +48,6 @@ public class GuideBooking extends AppCompatActivity {
     SimpleDateFormat currentDate = new SimpleDateFormat("ddMMyyyy");
     Date todayDate = new Date();
     String thisDate = currentDate.format(todayDate);
-    String vehicleName;
-
-    String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,27 +81,13 @@ public class GuideBooking extends AppCompatActivity {
         List<String> categories = new ArrayList<String>();
         categories.add("Hiace");
         categories.add("maco-polo");
-        categories.add("KDH");
+        categories.add("KHD");
         categories.add("Vanatte");
         categories.add("Dolphin");
         categories.add("Laylend Bus");
         ArrayAdapter<String> dataAdaptor = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, categories);
         dataAdaptor.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(dataAdaptor);
-
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-
-                vehicleName = adapterView.getItemAtPosition(i).toString();
-
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
 
         Text_Name = findViewById(R.id.editTextName);
         Text_Email = findViewById(R.id.editTextEmail);
@@ -149,8 +130,6 @@ public class GuideBooking extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(), "Please Enter Name", Toast.LENGTH_LONG).show();
                     else if (TextUtils.isEmpty(Text_Email.getText().toString()))
                         Toast.makeText(getApplicationContext(), "Please Enter E-Mail", Toast.LENGTH_LONG).show();
-                    else if(!(Text_Email.getText().toString()).matches(emailPattern))
-                        Toast.makeText(getApplicationContext(), "invalide E-Mail", Toast.LENGTH_LONG).show();
                     else if (TextUtils.isEmpty(Text_Days.getText().toString()))
                         Toast.makeText(getApplicationContext(), "Please Enter No Of Days", Toast.LENGTH_LONG).show();
                     else if (TextUtils.isEmpty(Text_Phone.getText().toString()))
@@ -159,7 +138,7 @@ public class GuideBooking extends AppCompatActivity {
                         detailForGuideReserv.setName(Text_Name.getText().toString().trim());
                         detailForGuideReserv.setEmail(Text_Email.getText().toString().trim());
                         detailForGuideReserv.setDays(Text_Days.getText().toString().trim());
-                        detailForGuideReserv.setVehicle(vehicleName.trim());
+//                        detailForGuideReserv.setVehicle(Text_Phone.getText().toString().trim());
                         detailForGuideReserv.setPhoneNumber(Integer.parseInt(Text_Phone.getText().toString().trim()));
 
                         x = thisDate + Text_Name.getText().toString().trim();

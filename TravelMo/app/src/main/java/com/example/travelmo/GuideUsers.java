@@ -85,29 +85,23 @@ public class GuideUsers extends AppCompatActivity {
         Intent gid = getIntent();
         place = gid.getStringExtra("district");
 
-        dbRef = FirebaseDatabase.getInstance().getReference().child("kandy").child("ClientGuide").child("G001");
+        dbRef = FirebaseDatabase.getInstance().getReference().child("GalleClient").child("Guide").child("G001");
         dbRef.addListenerForSingleValueEvent(new ValueEventListener() {
 
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    if (dataSnapshot.hasChildren()) {
-                        System.out.println("has Children");
-                        //System.out.println(dataSnapshot.child("id").getValue().toString());
-                        textViewName.setText(dataSnapshot.child("txtName").getValue().toString());
-                        textViewDes.setText(dataSnapshot.child("txtDes").getValue().toString());
-                        textViewDes.setText(dataSnapshot.child("txtAge").getValue().toString());
-                        textViewDes.setText(dataSnapshot.child("txtCon").getValue().toString());
-                        textViewDes.setText(dataSnapshot.child("txtEmail").getValue().toString());
-                        textViewDes.setText(dataSnapshot.child("txtNic").getValue().toString());
+                if (dataSnapshot.hasChildren()) {
+                    System.out.println("has Children");
+                    //System.out.println(dataSnapshot.child("id").getValue().toString());
+                    textViewName.setText(dataSnapshot.child("name").getValue().toString());
+                    textViewDes.setText(dataSnapshot.child("description").getValue().toString());
 
-                    } else {
-                        System.out.println("no Children");
-                        Toast.makeText(getApplicationContext(), "No Values to retrive", Toast.LENGTH_LONG).show();
+                } else {
+                    System.out.println("no Children");
+                    Toast.makeText(getApplicationContext(), "No Values to retrive", Toast.LENGTH_LONG).show();
 
-                    }
                 }
-
-
+            }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="10dp"
+    android:padding="20dp">
+
+
+
+    <TextView
+        android:id="@+id/guide_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:textColor="@color/colorPrimaryText"
+        />
+
+    <Button
+        android:id="@+id/UpdateBtn"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginLeft="-90dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="5dp"
+        android:background="@drawable/gradient"
+        android:onClick="UpdateBtn"
+        android:shadowColor="@color/colorText"
+        android:text="@string/update"
+        android:textColor="@color/colorText"
+        android:textFontWeight="100"
+        android:textSize="18dp" />
+
+
+    <Button
+        android:id="@+id/DeleteBtn"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginLeft="90dp"
+        android:layout_marginTop="-52dp"
+        android:layout_marginBottom="5dp"
+        android:background="@drawable/gradient"
+        android:shadowColor="@color/colorText"
+        android:text="@string/delete"
+        android:textColor="@color/colorText"
+        android:textFontWeight="100"
+        android:textSize="18dp" />
+
+
+
+</LinearLayout>

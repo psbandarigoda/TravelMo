@@ -1,40 +1,127 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:background="@color/colorDivider"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="10sp"
     tools:context=".DelUpdateActivity">
 
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:orientation="vertical">
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="55dp"
-            android:layout_marginTop="30dp"
-            android:src="@drawable/ic_view_list_black_24dp" />
+        android:orientation="vertical"
+        android:padding="30dp">
 
         <TextView
             android:id="@+id/textView2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="-45dp"
-            android:layout_marginBottom="40dp"
+            android:layout_marginTop="35dp"
+            android:layout_marginBottom="50dp"
             android:fontFamily="sans-serif-black"
-            android:text="@string/guide_list"
+            android:text="@string/topic"
             android:textAlignment="center"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="30sp" />
 
-        <LinearLayout
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:id="@+id/key"/>
+
+        <EditText
+            android:id="@+id/editName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="@string/name"
+            android:textColor="@color/colorSecondaryText"
+            android:hint="Enter Name"
+            android:layout_marginBottom="20dp"/>
+
+        <EditText
+        android:id="@+id/editNic"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="@string/nic"
+        android:textColor="@color/colorSecondaryText"
+        android:hint="Enter NIC"
+        android:layout_marginBottom="20dp"/>
+
+
+
+        <EditText
+            android:id="@+id/editAge"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="@string/age"
+            android:textColor="@color/colorSecondaryText"
+            android:hint="Enter Age"
+            android:layout_marginBottom="20dp"/>
+
+
+
+
+        <EditText
+            android:id="@+id/editCon"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="phone"
+            android:text="@string/phone"
+            android:textColor="@color/colorSecondaryText"
+            android:hint="Enter Contact Number"
+            android:layout_marginBottom="20dp"/>
+
+
+
+        <EditText
+            android:id="@+id/editEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textEmailAddress"
+            android:text="@string/email"
+            android:textColor="@color/colorSecondaryText"
+            android:hint="Enter Email"
+            android:layout_marginBottom="20dp"/>
+
+        <TextView
+            android:id="@+id/textView8"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:text="@string/gtxt_vehicle"
+            android:textSize="18dp"
+            android:padding="8dp"
+            android:textColor="@color/colorPrimaryText"
+            android:layout_marginBottom="20dp"
+            />
+
+        <Spinner
+            android:id="@+id/spinnerVehicle"
+            android:layout_width="210dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="174dp"
+            android:layout_marginTop="-54dp"
+            android:popupBackground="@color/colorText"
+            android:layout_marginBottom="20dp"
+            android:spinnerMode="dropdown"
+            android:scrollbars="none"
+            />
+
+
+
+        <EditText
+            android:id="@+id/editDes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+<<<<<<< HEAD
             android:orientation="horizontal">
 
             <ImageView
@@ -112,5 +199,29 @@
 
             </LinearLayout>
         </LinearLayout>
+=======
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="@string/description"
+            android:textColor="@color/colorSecondaryText"
+            android:hint="Enter Description"
+            android:layout_marginBottom="20dp"/>
+
+
+        <Button
+            android:id="@+id/gUpdate"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/gradient"
+            android:shadowColor="@color/colorText"
+            android:text="@string/gUpdate"
+            android:textColor="@color/colorText"
+            android:textFontWeight="100"
+            android:textSize="20dp" />
+
+>>>>>>> 5ae07892940515cd06319d1519d806b4930f57c2
     </LinearLayout>
 </ScrollView>

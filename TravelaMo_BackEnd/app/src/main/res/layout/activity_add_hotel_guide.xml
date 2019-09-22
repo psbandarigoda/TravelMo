@@ -44,7 +44,7 @@
         android:textSize="20dp" />
 
     <Button
-        android:id="@+id/addHotel_btn"
+        android:id="@+id/guideAdd"
         android:layout_width="200dp"
         android:layout_height="60dp"
         android:layout_gravity="center"

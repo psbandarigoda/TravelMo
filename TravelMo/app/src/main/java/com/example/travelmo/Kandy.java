@@ -1,11 +1,13 @@
 package com.example.travelmo;
 
+import java.util.Map;
+
 public class Kandy {
     String name;
     String description;
     String img;
 
-    public Kandy(String user, String score) {
+    public Kandy(String user, Map<String, Object> score) {
     }
 
     public Kandy(String name, String description, String img) {

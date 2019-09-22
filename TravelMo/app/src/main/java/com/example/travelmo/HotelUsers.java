@@ -6,6 +6,7 @@ import android.os.Bundle;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
+import android.util.Log;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -35,6 +36,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class HotelUsers extends AppCompatActivity {
 
@@ -43,6 +45,8 @@ public class HotelUsers extends AppCompatActivity {
     Button search;
     String place;
     String count = "1001";
+
+    static String distr ;
 
     private RecyclerView recycler ;
    private ImageAdapter imageAdapter;
@@ -84,6 +88,7 @@ public class HotelUsers extends AppCompatActivity {
 
         Intent id = getIntent();
         place = id.getStringExtra("district");
+        distr = place;
 
         recycler = findViewById(R.id.recycle);
         recycler.setHasFixedSize(true);
@@ -101,9 +106,11 @@ public class HotelUsers extends AppCompatActivity {
 //                   Kandy kandy = postSnapshot.getValue(Kandy.class);
 //                    ulist.add(kandy);
 
+                    Map<String, Object> map = (Map<String, Object>) dataSnapshot.getValue();
+
                     String user = postSnapshot.getKey();
-                    String score = postSnapshot.getValue(String.class);
-                    Kandy kan = new Kandy(user, score);
+//                    String score = postSnapshot.getValue(String.class);
+                    Kandy kan = new Kandy(user,map);
                     ulist.add(kan);
 
                 }

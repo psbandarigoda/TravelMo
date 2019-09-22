@@ -24,16 +24,6 @@
             android:textColor="@color/colorPrimaryDark"
             android:textSize="30sp" />
 
-        <EditText
-            android:id="@+id/hotelid_editTxt"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="60dp"
-            android:ems="10"
-            android:selectAllOnFocus="true"
-            android:text="Enter Unique ID"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
-
         <TextView
             android:id="@+id/textView4"
             android:layout_width="match_parent"
@@ -44,11 +34,12 @@
             android:textSize="18dp" />
 
         <EditText
-            android:id="@+id/hotelname_editTxt"
+            android:id="@+id/txtName1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="text"
+            android:inputType="textPersonName"
+            android:text="@string/hname"
             android:textColor="@color/colorSecondaryText" />
 
         <TextView
@@ -61,11 +52,12 @@
             android:textSize="18dp" />
 
         <EditText
-            android:id="@+id/hotelAddress_editTxt"
+            android:id="@+id/txtAge1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="text"
+            android:inputType="textPersonName"
+            android:text="@string/haddress"
             android:textColor="@color/colorSecondaryText" />
 
         <TextView
@@ -79,11 +71,13 @@
 
 
         <EditText
-            android:id="@+id/hotelPhone_editTxt"
+            android:id="@+id/txtCon1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="number" />
+            android:inputType="phone"
+            android:text="@string/hphone"
+            android:textColor="@color/colorSecondaryText" />
 
         <TextView
             android:id="@+id/textView7"
@@ -95,11 +89,12 @@
             android:textColor="@color/colorPrimaryText"/>
 
         <EditText
-            android:id="@+id/hotelEmail_editTxt"
+            android:id="@+id/txtEmail1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="textEmailAddress"
+            android:text="@string/hemail"
             android:textColor="@color/colorSecondaryText" />
 
         <TextView
@@ -112,11 +107,12 @@
             android:textSize="18dp" />
 
         <EditText
-            android:id="@+id/hotelStarRating_editTxt"
+            android:id="@+id/editText5"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="number"
+            android:inputType="textPersonName"
+            android:text="@string/hstar"
             android:textColor="@color/colorSecondaryText" />
 
         <TextView
@@ -129,14 +125,16 @@
             android:textColor="@color/colorPrimaryText"/>
 
         <EditText
-            android:id="@+id/hotelDescription_editTxt"
+            android:id="@+id/txtDes1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
+            android:inputType="textPersonName"
             android:text="@string/hdesc"
             android:textColor="@color/colorSecondaryText" />
 
         <Button
+<<<<<<< HEAD
             android:id="@+id/select_photobtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -156,19 +154,24 @@
 
         <Button
             android:id="@+id/addHotel_btn"
+=======
+            android:id="@+id/guideAdd"
+>>>>>>> 5ae07892940515cd06319d1519d806b4930f57c2
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="15dp"
             android:layout_marginBottom="5dp"
             android:background="@drawable/gradient"
+<<<<<<< HEAD
+=======
+            android:onClick="add_hotel"
+>>>>>>> 5ae07892940515cd06319d1519d806b4930f57c2
             android:shadowColor="@color/colorText"
             android:text="@string/addguide"
             android:textColor="@color/colorText"
             android:textFontWeight="100"
             android:textSize="20dp" />
-
-
 
 
     </LinearLayout>

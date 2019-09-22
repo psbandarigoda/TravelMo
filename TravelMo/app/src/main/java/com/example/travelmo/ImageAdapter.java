@@ -16,6 +16,8 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
+import static com.example.travelmo.HotelUsers.distr;
+
 public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHolder> {
 
 
@@ -30,9 +32,12 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHol
         this.mupload = mupload;
     }
 
+
     @NonNull
     @Override
     public ImageViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+
+        System.out.print(distr);
 
         View v = LayoutInflater.from(desc).inflate(R.layout.image_view,parent,false);
         return new ImageViewHolder(v);
@@ -43,10 +48,11 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHol
             Kandy upload = mupload.get(position);
             holder.name.setText(upload.getName());
             holder.description.setText(upload.getDescription());
+
         Picasso.with(desc)
                 .load(upload.getImg())
                 .placeholder(R.mipmap.ic_launcher)
-                .resize(200,180)
+                .resize(250,300)
                 .centerCrop()
                 .into(holder.image);
 
@@ -56,7 +62,7 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHol
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(desc,HotelBooking.class);
-
+                intent.putExtra( "place",distr);
                 desc.startActivity(intent);
             }
         });

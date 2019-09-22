@@ -114,8 +114,8 @@ public class HotelBooking extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                dbref = FirebaseDatabase.getInstance().getReference().child("kandy").child("HotelUser");
                 dbref = FirebaseDatabase.getInstance().getReference().child(plc).child("HotelUser");
+
                 try {
                     if (TextUtils.isEmpty(name.getText().toString()))
                         Toast.makeText(getApplicationContext(), "Please Enter Name", Toast.LENGTH_LONG).show();
@@ -136,10 +136,10 @@ public class HotelBooking extends AppCompatActivity {
 //                        hotel.setCounter(ans);
 
                          x =  day + name.getText().toString().trim();
-                        x = email.getText().toString().trim();
+//                        x = email.getText().toString().trim();
                         dbref.child(x).setValue(hotel);
 
-                        Toast.makeText(getApplicationContext(), "Hotel Booked..", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "Hotel Booked..", Toast.LENGTH_SHORT).show();
                         clearControls();
 
 //                        String val = count;
@@ -151,6 +151,7 @@ public class HotelBooking extends AppCompatActivity {
                         intent.putExtra("userObject",x);
                         intent.putExtra("email",email.getText().toString());
                         intent.putExtra("name",name.getText().toString());
+                        intent.putExtra("place",plc);
                         startActivity(intent);
                     }
 
@@ -169,12 +170,6 @@ public class HotelBooking extends AppCompatActivity {
         phone.setText("");
     }
 
-//    public String returnid() {
-//
-//        count = String.valueOf(Integer.valueOf(count) + 1);
-//
-//        return count;
-//    }
 
 
 }

@@ -42,7 +42,7 @@ public class HotelBookingDetailEdit extends AppCompatActivity {
 
 
         Intent id = getIntent();
-         place = id.getStringExtra("email");
+         place = id.getStringExtra("place");
          value = id.getStringExtra("id");
     }
 
@@ -54,7 +54,7 @@ public class HotelBookingDetailEdit extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                dref = FirebaseDatabase.getInstance().getReference().child("kandy").child("HotelUser");
+                dref = FirebaseDatabase.getInstance().getReference().child(place).child("HotelUser");
                 dref.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -66,7 +66,7 @@ public class HotelBookingDetailEdit extends AppCompatActivity {
                                 hotel.setDays(uday.getText().toString().trim());
                                 hotel.setPhone(Integer.parseInt(uPhone.getText().toString().trim()));
 
-                                dref = FirebaseDatabase.getInstance().getReference().child("kandy").child("HotelUser").child(value) ;
+                                dref = FirebaseDatabase.getInstance().getReference().child(place).child("HotelUser").child(value) ;
                                 dref.setValue(hotel);
                                 Toast.makeText(getApplicationContext(),"Updated",Toast.LENGTH_LONG).show();
 

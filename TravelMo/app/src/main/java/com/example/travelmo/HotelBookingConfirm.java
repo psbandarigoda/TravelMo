@@ -55,12 +55,12 @@ public class HotelBookingConfirm extends AppCompatActivity {
 
         Intent id = getIntent();
         value = id.getStringExtra("userObject");
-        mai = id.getStringExtra("email");
-        name = id.getStringExtra("name");
+//        mai = id.getStringExtra("email");
+//        name = id.getStringExtra("name");
+        place = id.getStringExtra("place");
 
 
-
-        DatabaseReference dbref = FirebaseDatabase.getInstance().getReference().child("kandy").child("HotelUser").child(value);
+        DatabaseReference dbref = FirebaseDatabase.getInstance().getReference().child(place).child("HotelUser").child(value);
 
         dbref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -87,9 +87,9 @@ public class HotelBookingConfirm extends AppCompatActivity {
                     room.setText(dataSnapshot.child("rooms").getValue().toString());
 //                     phone.setText(dataSnapshot.child("phone").getValue().toString());
 
-                    Toast.makeText(getApplicationContext(), "Yes", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Success!!!", Toast.LENGTH_LONG).show();
                 } else {
-                    Toast.makeText(getApplicationContext(), "No", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Not Success", Toast.LENGTH_LONG).show();
                 }
 
 
@@ -121,9 +121,9 @@ public class HotelBookingConfirm extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(HotelBookingConfirm.this, HotelBookingDetailEdit.class);
-
-                intent.putExtra("id",value);
-                intent.putExtra("email",mai);
+//
+//                intent.putExtra("id",value);
+//                intent.putExtra("email",mai);
 
                 intent.putExtra("id", value);
                 intent.putExtra("place", place);
@@ -148,15 +148,15 @@ public class HotelBookingConfirm extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                dref = FirebaseDatabase.getInstance().getReference().child("kandy").child("HotelUser");
+                dref = FirebaseDatabase.getInstance().getReference().child(place).child("HotelUser");
                 dref.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         if (dataSnapshot.hasChild(value)) {
 
-                            dref = FirebaseDatabase.getInstance().getReference().child("kandy").child("HotelUser").child(value);
-
                             dref = FirebaseDatabase.getInstance().getReference().child(place).child("HotelUser").child(value);
+
+
 
                             dref.removeValue();
                             Toast.makeText(getApplicationContext(), "Deleted", Toast.LENGTH_LONG).show();

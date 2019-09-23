@@ -104,7 +104,7 @@ public class AddActivity extends AppCompatActivity {
         guideAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                dbRef = FirebaseDatabase.getInstance().getReference().child("kandy").child("ClientGuide");
+                dbRef = FirebaseDatabase.getInstance().getReference().child(AddHotelGuide.dist).child("ClientGuide");
 
                 if(view == buttonChoose){
                     showFileChooser();

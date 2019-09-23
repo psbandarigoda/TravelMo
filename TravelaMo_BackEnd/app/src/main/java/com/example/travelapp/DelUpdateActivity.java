@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -28,90 +29,72 @@ import java.util.ArrayList;
 public class DelUpdateActivity extends AppCompatActivity {
 
     EditText editName,editAge,editDes,editCon,editEmail,editNic;
-    //DatabaseReference dbref;
-    Button UpdateBtn;
-    GuideModel guide;
-    String value;
-    FirebaseDatabase database;
+    DatabaseReference dbref;
+    Button UpdateBtn1;
+    GuideModel guideObj;
+    String district;
+    Intent intent;
 
 
-
-    @Override
+   @Override
    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_del_update);
 
-        //database = FirebaseDatabase.getInstance();
-
+        this.intent = getIntent();
         editName = (EditText)findViewById(R.id.editName);
         editAge = (EditText)findViewById(R.id.editAge);
         editDes = (EditText)findViewById(R.id.editDes);
         editCon = (EditText)findViewById(R.id.editCon);
         editEmail = (EditText)findViewById(R.id.editEmail);
-        editNic = (EditText)findViewById(R.id.editNic);
-        UpdateBtn = (Button)findViewById(R.id.UpdateBtn);
+        UpdateBtn1 = (Button)findViewById(R.id.gUpdate);
+        
+        UpdateBtn1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                updateGuide1();
+            }
+        });
 
-        editName.setText(getIntent().getStringExtra("name"));
-        editAge.setText(getIntent().getStringExtra("age"));
-        editDes.setText(getIntent().getStringExtra("des"));
-        editCon.setText(getIntent().getStringExtra("con"));
-        editEmail.setText(getIntent().getStringExtra("email"));
-        editNic.setText(getIntent().getStringExtra("nic"));
+        editName.setText(getIntent().getStringExtra("hname"));
+        editAge.setText(getIntent().getStringExtra("hage"));
+        editDes.setText(getIntent().getStringExtra("hdesc"));
+        editCon.setText(getIntent().getStringExtra("gcon"));
+        editEmail.setText(getIntent().getStringExtra("hid"));
 
-        guide = new GuideModel();
-
-       Intent nic = getIntent();
-       value = nic.getStringExtra("userObject");
-
-       // dbref = FirebaseDatabase.getInstance().getReference("kandy").child("ClientGuide");
-
-       
-//       UpdateBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                DatabaseReference upRef = FirebaseDatabase.getInstance().getReference().child("kandy").child("ClientGuide");
-//                upRef.addListenerForSingleValueEvent(new ValueEventListener() {
-//                    @Override
-//                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                        if (dataSnapshot.hasChild(value)){
-//                            try {
-//                                guide.setTxtName(editName.getText().toString().trim());
-//                                guide.setTxtAge(editAge.getText().toString().trim());
-//                                guide.setTxtCon(Integer.parseInt(editCon.getText().toString().trim()));
-//                                guide.setTxtEmail(editEmail.getText().toString().trim());
-//                                guide.setTxtDes(editDes.getText().toString().trim());
-//                                guide.setTxtNic(editNic.getText().toString().trim());
-//
-//                                dbRef = FirebaseDatabase.getInstance().getReference().child("kandy").child("ClientGuide").child(value);
-//                                dbRef.setValue(guide);
-//
-//                                Toast.makeText(getApplicationContext(),"Data Updated successfully",Toast.LENGTH_SHORT).show();
-//
-//
-//                            }
-//                            catch (NumberFormatException e){
-//                                Toast.makeText(getApplicationContext(),"Invalid Contact Number",Toast.LENGTH_SHORT).show();
-//                            }
-//                            Intent intent = new Intent(DelUpdateActivity.this,View.class);
-//                            startActivity(intent);
-//                        }
-//
-//
-//                        else
-//                            Toast.makeText(getApplicationContext(),"No source to Update",Toast.LENGTH_SHORT).show();
-//                    }
-//
-//                    @Override
-//                    public void onCancelled(@NonNull DatabaseError databaseError) {
-//
-//                    }
-//                });
-//            }
-//        });
-
-
-
+        district = intent.getStringExtra("hdist");
+        
    }
+
+   public void updateGuide1(){
+        dbref = FirebaseDatabase.getInstance().getReference().child(district).child("ClientGuide");
+        guideObj = new GuideModel();
+
+        try {
+            if(TextUtils.isEmpty(editName.toString()))
+                Toast.makeText(getApplicationContext(), "Please enter a Name", Toast.LENGTH_SHORT).show();
+            if(TextUtils.isEmpty(editAge.toString()))
+                Toast.makeText(getApplicationContext(), "Please enter an Address", Toast.LENGTH_SHORT).show();
+            if(TextUtils.isEmpty(editEmail.toString()))
+                Toast.makeText(getApplicationContext(), "Please enter an email", Toast.LENGTH_SHORT).show();
+            if(TextUtils.isEmpty(editDes.toString()))
+                Toast.makeText(getApplicationContext(), "Please enter a description", Toast.LENGTH_SHORT).show();
+            else{
+
+                guideObj.setTxtName(editName.getText().toString().trim());
+                guideObj.setTxtAge(editAge.getText().toString().trim());
+                guideObj.setTxtCon(Integer.parseInt(editCon.getText().toString().trim()));
+                guideObj.setTxtEmail(editEmail.getText().toString().trim());
+                guideObj.setTxtDes(editDes.getText().toString().trim());
+                String path = editEmail.getText().toString();
+                dbref.child(path).setValue(guideObj);
+            }
+        }
+        catch (NumberFormatException e){
+            Toast.makeText(getApplicationContext(), "Invalid Phone number", Toast.LENGTH_SHORT).show();
+        }
+        
+    }
 
 
 }

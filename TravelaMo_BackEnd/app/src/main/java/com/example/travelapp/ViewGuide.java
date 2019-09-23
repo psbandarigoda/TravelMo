@@ -33,106 +33,56 @@ import java.util.List;
 public class ViewGuide extends AppCompatActivity {
 
 
-    String value;
-    ListView listView;
-    DatabaseReference dbRef;
-    FirebaseDatabase database;
-    ArrayList list;
-    ArrayAdapter<String> adapter;
-    GuideModel guide;
-    Button guideBtn,DeleteBtn,UpdateBtn;
+    DatabaseReference db;
+    ListView listViewGuideModels;
+    List<GuideModel> guides;
+    String district;
+
+    public static void deleteGuideModel(String dist, String txtEmail) {
+        DatabaseReference dhot = FirebaseDatabase.getInstance().getReference(dist+"/ClientGuide").child(txtEmail);
+        dhot.removeValue();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_guide);
 
+        listViewGuideModels = (ListView) findViewById(R.id.listView);
 
-        UpdateBtn = findViewById(R.id.UpdateBtn);
-        guideBtn = findViewById(R.id.guideBtn);
-        listView = findViewById(R.id.listView);
-        database = FirebaseDatabase.getInstance();
-        list = new ArrayList<>();
-        guide = new GuideModel();
-        DeleteBtn = findViewById(R.id.DeleteBtn);
+        guides = new ArrayList<GuideModel>();
+        district = AddHotelGuide.dist;
+        db = FirebaseDatabase.getInstance().getReference(district+"/ClientGuide");
+        ViewGuide.checkerthread1 ch = new ViewGuide.checkerthread1(100000);
+        ch.start();
 
-       Intent nic = getIntent();
-       value = nic.getStringExtra("userObject");
+    }
 
-
-
-        //ListView
-        adapter = new ArrayAdapter<String>(this, R.layout.guide_info, R.id.guide_info, list);
-        dbRef = database.getReference("kandy").child("ClientGuide");
-        dbRef.addValueEventListener(new ValueEventListener() {
+    @Override
+    protected void onStart() {
+        super.onStart();
+        //attaching value event listener
+        db.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                guides.clear();
 
-
-                for (DataSnapshot ds : dataSnapshot.getChildren()) {
-                    guide = ds.getValue(GuideModel.class);
-                    list.add(" Name: " + guide.getTxtName() + " \n NIC: " + guide.getTxtNic() + " \n Contact Number: " + guide.getTxtCon() + " \n Age: "
-                            + guide.getTxtAge() + " \n Email: " + guide.getTxtEmail() + " \n Description: " + guide.getTxtDes());
-
-
+                //iteratuon through alsll the nodes
+                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                    GuideModel guide = (GuideModel) postSnapshot.getValue(GuideModel.class);
+                    guides.add(guide);
                 }
 
-                listView.setAdapter(adapter);
-
-
-                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                        Intent delUpdate = new Intent(ViewGuide.this, DelUpdateActivity.class);
-                        GuideModel g = (GuideModel) adapterView.getItemAtPosition(i);
-                        delUpdate.putExtra("name", g.getTxtName());
-                        delUpdate.putExtra("key", g.getTxtNic());
-                        delUpdate.putExtra("age", g.getTxtAge());
-                        delUpdate.putExtra("email", g.getTxtEmail());
-                        delUpdate.putExtra("des", g.getTxtDes());
-                        delUpdate.putExtra("con", g.getTxtCon());
-                        startActivity(delUpdate);
-                    }
-                });
+                GuideModelsList guideAdapter = new GuideModelsList(ViewGuide.this, guides);
+                listViewGuideModels.setAdapter(guideAdapter);
 
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
+            public void onCancelled(DatabaseError databaseError) {
 
             }
         });
-
-
-        DeleteBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                DatabaseReference delRef = FirebaseDatabase.getInstance().getReference().child("kandy").child("ClientGuide");
-                delRef.addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        if (dataSnapshot.hasChild(value)){
-                            dbRef = FirebaseDatabase.getInstance().getReference().child("kandy").child("ClientGuide").child(value);
-                            dbRef.removeValue();
-                            Toast.makeText(getApplicationContext(),"Guide deleted Successfully",Toast.LENGTH_SHORT).show();
-
-                        }
-                        else
-                            Toast.makeText(getApplicationContext(),"No Guide to delete",Toast.LENGTH_SHORT).show();
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                    }
-                });
-                Intent intent = new Intent(ViewGuide.this,ViewGuide.class);
-                startActivity(intent);
-
-            }
-        });
-
-
     }
 
     public void guideBtn(View v) {
@@ -141,9 +91,54 @@ public class ViewGuide extends AppCompatActivity {
     }
 
 
-    public void UpdateBtn(View v) {
-        Intent intent = new Intent(this, DelUpdateActivity.class);
-        startActivity(intent);
+//    public void UpdateBtn(View v) {
+//        Intent intent = new Intent(this, DelUpdateActivity.class);
+//        startActivity(intent);
+//    }
+
+
+    public void checkIfClicked(){
+        if(GuideModelsList.checker1)
+            updateGuide();
+    }
+
+    public void updateGuide(){
+        String districtFromAdd = add_hotel.district;
+        GuideModel h = GuideModelsList.guideToUpdate;
+        Intent updateDelete = new Intent(ViewGuide.this, DelUpdateActivity.class);
+        updateDelete.putExtra("hid", h.getTxtEmail());
+        updateDelete.putExtra("hname", h.getTxtName());
+        updateDelete.putExtra("hage", h.getTxtAge());
+
+        String num = Integer.valueOf(h.getTxtCon()).toString();
+        updateDelete.putExtra("hcont",  num);
+
+        updateDelete.putExtra("hdesc", h.getTxtDes());
+        updateDelete.putExtra("hdist", district);
+
+        startActivity(updateDelete);
+        GuideModelsList.checker1 = false;
+    }
+
+    class checkerthread1 extends Thread{
+        int seconds;
+
+        checkerthread1(int seconds){
+            this.seconds = seconds;
+        }
+
+        @Override
+        public void run(){
+            for(int i=0; i< seconds; i++){
+                checkIfClicked();
+                try{
+                    Thread.sleep(100);
+                }catch (InterruptedException e){
+                    e.printStackTrace();
+                }
+            }
+        }
+
     }
 
 }

@@ -8,8 +8,11 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -34,8 +37,13 @@ public class HotelsList extends ArrayAdapter<Hotel> {
 
         TextView textViewName = (TextView) listViewItem.findViewById(R.id.hotel_nametxtView);
         TextView textViewDesc = (TextView) listViewItem.findViewById(R.id.hotel_descTxtView);
+        ImageView imageView = (ImageView) listViewItem.findViewById(R.id.showhotelphoto_img);
         Button btnUpdate = (Button) listViewItem.findViewById(R.id.updatehotelbtn);
         Button btnDelete = (Button) listViewItem.findViewById(R.id.deletehotelbtn);
+
+
+
+
 
         btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,6 +64,7 @@ public class HotelsList extends ArrayAdapter<Hotel> {
         Hotel hotel = hotels.get(position);
         textViewName.setText(hotel.getHotelName());
         textViewDesc.setText(hotel.getHotelDescription());
+//        Picasso.get().load(hotel.getHotelimage()).into(imageView);
 
 
 

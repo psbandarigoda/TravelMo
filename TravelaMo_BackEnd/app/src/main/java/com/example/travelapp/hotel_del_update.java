@@ -109,8 +109,6 @@ public class hotel_del_update extends AppCompatActivity {
         db.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-
-
                 hotels.clear();
 
                 //iteratuon through alsll the nodes
@@ -122,22 +120,6 @@ public class hotel_del_update extends AppCompatActivity {
                 HotelsList hotelAdapter = new HotelsList(hotel_del_update.this, hotels);
                 listViewHotels.setAdapter(hotelAdapter);
 
-//                listViewHotels.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//                    @Override
-//                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-//                        Intent updateDelete = new Intent(hotel_del_update.this, HotelDeleteOrUpdate.class);
-//                        Hotel h = (Hotel) adapterView.getItemAtPosition(i);
-//                        updateDelete.putExtra("hid", h.getHotelId());
-//                        System.out.println("OKOSDKOSKD"+h.getHotelId());
-//                        updateDelete.putExtra("hname", h.getHotelName());
-//                        updateDelete.putExtra("hadd", h.getHotelAddress());
-//                        updateDelete.putExtra("hcont", h.getHotelContactNumber());
-//                        updateDelete.putExtra("hstar", h.getHotelStarRating());
-//                        updateDelete.putExtra("hdesc", h.getHotelDescription());
-//                        updateDelete.putExtra("hemail", h.getHotelEmailAddress());
-//
-//                    }
-//                });
             }
 
             @Override
@@ -152,11 +134,6 @@ public class hotel_del_update extends AppCompatActivity {
         dhot.removeValue();
     }
 
-
-
-
-
-
     //intents
     public void hdelete(View v) {
         Intent intent = new Intent(this, hotel_del_update.class);
@@ -170,5 +147,5 @@ public class hotel_del_update extends AppCompatActivity {
     }
 
 
-   
+
 }

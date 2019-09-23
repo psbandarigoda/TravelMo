@@ -24,7 +24,6 @@
         android:layout_marginTop="15dp"
         android:layout_marginBottom="5dp"
         android:background="@drawable/gradient"
-        android:onClick="UpdateBtn"
         android:shadowColor="@color/colorText"
         android:text="@string/update"
         android:textColor="@color/colorText"

@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -39,12 +40,6 @@ public class HotelDeleteOrUpdate extends AppCompatActivity {
 
         buttonUpdate = (Button) findViewById(R.id.update_btn);
 
-        buttonUpdate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                updateHotel();
-            }
-        });
 
         txtHotelID.setText(intent.getStringExtra("hid"));
         txtHotelAddr.setText(intent.getStringExtra("hadd"));
@@ -57,7 +52,13 @@ public class HotelDeleteOrUpdate extends AppCompatActivity {
         district = intent.getStringExtra("hdist");
 
 
-
+        buttonUpdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                updateHotel();
+                viewhotel(view);
+            }
+        });
     }
 
     public void updateHotel(){
@@ -91,5 +92,11 @@ public class HotelDeleteOrUpdate extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "Invalid Phone number", Toast.LENGTH_SHORT).show();
         }
 
+    }
+
+    public void viewhotel(View v) {
+        Intent intent = new Intent(this, hotel_del_update.class);
+        intent.putExtra("district" , district);
+        startActivity(intent);
     }
 }

@@ -38,16 +38,17 @@ public class add_hotel extends AppCompatActivity {
     Button btnHotelAdd;
 
     Intent intentget;
-    static String district;
+    static String district = AddHotelGuide.dist;
     String hotelidextra;
     Hotel hotelObj;
     DatabaseReference dbRef;
 
     //image upload stuff
-    private Button btnChoose, btnUpload;
-    private ImageView imageView;
-    private Uri filePath;
-    private final int PICK_IMAGE_REQUEST = 71;
+    Button btnChoose, btnUpload;
+    ImageView imageView;
+    Uri filePath;
+    Uri downloadUrl;
+    final int PICK_IMAGE_REQUEST = 71;
     FirebaseStorage storage;
     StorageReference storageReference;
 
@@ -67,8 +68,7 @@ public class add_hotel extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_hotel);
 
-         this.intentget = getIntent();
-        district =  intentget.getStringExtra("district");
+        this.intentget = getIntent();
 
         txtHotelID = findViewById(R.id.hotelid_editTxt);
         txtHotelName = findViewById(R.id.hotelname_editTxt);
@@ -97,7 +97,7 @@ public class add_hotel extends AppCompatActivity {
         btnUpload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                    uploadImg();
+                uploadImg();
             }
         });
 
@@ -127,34 +127,35 @@ public class add_hotel extends AppCompatActivity {
 
 
     public void addHotel(){
-        dbRef = FirebaseDatabase.getInstance().getReference().child(district).child("ClientHotel");
+        dbRef = FirebaseDatabase.getInstance().getReference(district+"/ClientHotel");
         hotelObj = new Hotel();
 
         try {
-                if(TextUtils.isEmpty(txtHotelID.toString()))
-                    Toast.makeText(getApplicationContext(), "Please enter an ID [hotelnamewithoutspaces]", Toast.LENGTH_SHORT).show();
-                if(TextUtils.isEmpty(txtHotelName.toString()))
-                    Toast.makeText(getApplicationContext(), "Please enter Hotel Name", Toast.LENGTH_SHORT).show();
-                if(TextUtils.isEmpty(txtHotelAddr.toString()))
-                    Toast.makeText(getApplicationContext(), "Please enter Address", Toast.LENGTH_SHORT).show();
-                if(TextUtils.isEmpty(txtHotelEmail.toString()))
-                    Toast.makeText(getApplicationContext(), "Please enter email", Toast.LENGTH_SHORT).show();
-                if(TextUtils.isEmpty(txtHotelDesc.toString()))
-                    Toast.makeText(getApplicationContext(), "Please enter a description", Toast.LENGTH_SHORT).show();
-                else{
+            if(TextUtils.isEmpty(txtHotelID.toString()))
+                Toast.makeText(getApplicationContext(), "Please enter an ID [hotelnamewithoutspaces]", Toast.LENGTH_SHORT).show();
+            if(TextUtils.isEmpty(txtHotelName.toString()))
+                Toast.makeText(getApplicationContext(), "Please enter Hotel Name", Toast.LENGTH_SHORT).show();
+            if(TextUtils.isEmpty(txtHotelAddr.toString()))
+                Toast.makeText(getApplicationContext(), "Please enter Address", Toast.LENGTH_SHORT).show();
+            if(TextUtils.isEmpty(txtHotelEmail.toString()))
+                Toast.makeText(getApplicationContext(), "Please enter email", Toast.LENGTH_SHORT).show();
+            if(TextUtils.isEmpty(txtHotelDesc.toString()))
+                Toast.makeText(getApplicationContext(), "Please enter a description", Toast.LENGTH_SHORT).show();
+            else{
 
-                    hotelObj.setHotelId(txtHotelID.getText().toString().trim());
-                    hotelObj.setHotelName(txtHotelName.getText().toString().trim());
-                    hotelObj.setHotelAddress(txtHotelAddr.getText().toString().trim());
-                    hotelObj.setHotelContactNumber(Integer.parseInt(txtHotelPhone.getText().toString().trim()));
-                    hotelObj.setHotelEmailAddress(txtHotelEmail.getText().toString().trim());
-                    hotelObj.setHotelStarRating(Integer.parseInt(txtHotelStar.getText().toString().trim()));
-                    hotelObj.setHotelDescription(txtHotelDesc.getText().toString().trim());
+                hotelObj.setHotelId(txtHotelID.getText().toString().trim());
+                hotelObj.setHotelName(txtHotelName.getText().toString().trim());
+                hotelObj.setHotelAddress(txtHotelAddr.getText().toString().trim());
+                hotelObj.setHotelContactNumber(Integer.parseInt(txtHotelPhone.getText().toString().trim()));
+                hotelObj.setHotelEmailAddress(txtHotelEmail.getText().toString().trim());
+                hotelObj.setHotelStarRating(Integer.parseInt(txtHotelStar.getText().toString().trim()));
+                hotelObj.setHotelDescription(txtHotelDesc.getText().toString().trim());
+//                hotelObj.setHotelimage(downloadUrl.toString().trim());
 
-                    String path = txtHotelID.getText().toString();
-                    dbRef.child(path).setValue(hotelObj);
-                    hotelidextra = txtHotelID.getText().toString();
-                }
+                String path = txtHotelID.getText().toString();
+                dbRef.child(path).setValue(hotelObj);
+                hotelidextra = txtHotelID.getText().toString();
+            }
         }
         catch (NumberFormatException e){
             Toast.makeText(getApplicationContext(), "Invalid Phone number", Toast.LENGTH_SHORT).show();
@@ -179,6 +180,7 @@ public class add_hotel extends AppCompatActivity {
         if(requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData()!=null ){
 
             filePath = data.getData();
+            System.out.println("FILEPATH ISSSSSS"+filePath);
             try{
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(),filePath);
                 imageView.setImageBitmap(bitmap);
@@ -188,7 +190,7 @@ public class add_hotel extends AppCompatActivity {
             }
         }
 
-        }
+    }
     //***********************upload image*************************
     private void uploadImg() {
         if (filePath != null){
@@ -197,6 +199,7 @@ public class add_hotel extends AppCompatActivity {
             progressDialog.show();
 
             StorageReference ref = storageReference.child(txtHotelID.getText().toString());
+//            final StorageReference refUri = storageReference.child(txtHotelID.getText().toString()).child(filePath.getLastPathSegment());
             ref.putFile(filePath)
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
@@ -207,20 +210,31 @@ public class add_hotel extends AppCompatActivity {
                     })
 
                     .addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                    progressDialog.dismiss();
-                    Toast.makeText(add_hotel.this, "Failed"+e.getMessage(), Toast.LENGTH_SHORT).show();
-                }
-            })
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            progressDialog.dismiss();
+                            Toast.makeText(add_hotel.this, "Failed"+e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    })
                     .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-                @Override
-                public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
-                    double progress = (100.0*taskSnapshot.getBytesTransferred()/taskSnapshot.getTotalByteCount());
-                    progressDialog.setMessage("Uploaded"+(int)progress+" %");
-                }
-            });
+                        @Override
+                        public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+                            double progress = (100.0*taskSnapshot.getBytesTransferred()/taskSnapshot.getTotalByteCount());
+
+                            progressDialog.setMessage("Uploaded"+(int)progress+" %");
+                        }
+                    });
+//            ref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+//                @Override
+//                public void onSuccess(Uri uri) {
+//                    downloadUrl = uri;
+//                    Toast.makeText(getBaseContext(), "Upload success! URL - " + downloadUrl.toString() , Toast.LENGTH_SHORT).show();
+//                }
+//            });
+
         }
+
+
 
     }
 

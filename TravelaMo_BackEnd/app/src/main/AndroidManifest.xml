@@ -9,11 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-<<<<<<< HEAD
         <activity android:name=".HotelDeleteOrUpdate"></activity>
-=======
         <activity android:name=".ViewGuide"></activity>
->>>>>>> 5ae07892940515cd06319d1519d806b4930f57c2
         <activity
             android:name=".hotelGuideList"
             android:label="@string/title_activity_hotel_guide_list"

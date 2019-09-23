@@ -60,11 +60,7 @@
                     >
 
                     <TextView
-<<<<<<< HEAD
-                        android:id="@+id/hotel_nametxtView"
-=======
                         android:id="@+id/txtName1"
->>>>>>> 5ae07892940515cd06319d1519d806b4930f57c2
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/guide_name"
@@ -73,11 +69,7 @@
 
 
                     <TextView
-<<<<<<< HEAD
-                        android:id="@+id/hotel_descTxtView"
-=======
                         android:id="@+id/txtDes1"
->>>>>>> 5ae07892940515cd06319d1519d806b4930f57c2
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/desc"
@@ -91,11 +83,7 @@
                         android:orientation="horizontal">
 
                         <Button
-<<<<<<< HEAD
-                            android:id="@+id/updatehotelbtn"
-=======
                             android:id="@+id/updatebtn"
->>>>>>> 5ae07892940515cd06319d1519d806b4930f57c2
                             android:layout_width="100dp"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
@@ -110,11 +98,7 @@
 
 
                         <Button
-<<<<<<< HEAD
-                            android:id="@+id/deletehotelbtn"
-=======
                             android:id="@+id/deletebtn"
->>>>>>> 5ae07892940515cd06319d1519d806b4930f57c2
                             android:layout_width="100dp"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"

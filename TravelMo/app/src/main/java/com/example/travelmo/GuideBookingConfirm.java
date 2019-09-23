@@ -62,7 +62,7 @@ public class GuideBookingConfirm extends AppCompatActivity {
                     txt_name.setText(dataSnapshot.child("name").getValue().toString());
                     txt_mail.setText(dataSnapshot.child("email").getValue().toString());
                     txt_days.setText(dataSnapshot.child("days").getValue().toString());
-//                    txt_vehicle.setText(dataSnapshot.child("vehicle").getValue().toString());
+                    txt_vehicle.setText(dataSnapshot.child("vehicle").getValue().toString());
                     txt_phoneNumber.setText(dataSnapshot.child("phoneNumber").getValue().toString());
 
                     Toast.makeText(getApplicationContext(), "Added", Toast.LENGTH_LONG).show();
@@ -104,8 +104,6 @@ public class GuideBookingConfirm extends AppCompatActivity {
             public void onClick(View view) {
                 sendMail();
                 Toast.makeText(getApplicationContext(), "Email Sending", Toast.LENGTH_LONG).show();
-//                Intent intent = new Intent(GuideBookingConfirm.this, GuideUsers.class);
-//                startActivity(intent);
             }
         });
 

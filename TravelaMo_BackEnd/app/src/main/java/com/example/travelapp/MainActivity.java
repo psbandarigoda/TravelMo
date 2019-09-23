@@ -87,12 +87,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     public void galle(View view) {
         Intent intent = new Intent(this, AddHotelGuide.class);
-        intent.putExtra("district","galle");
+        intent.putExtra("district","Galle");
         startActivity(intent); //start as activity
     }
     public void kandy(View view) {
         Intent intent = new Intent(this, AddHotelGuide.class);
-        intent.putExtra("district","kandy");
+        intent.putExtra("district","Kandy");
         startActivity(intent); //start as activity
     }
     public void rathnapura(View view) {

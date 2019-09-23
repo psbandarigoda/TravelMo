@@ -1,73 +1,26 @@
 package com.example.travelapp;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.ProgressDialog;
-import android.content.ContentResolver;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
-import android.text.TextUtils;
 import android.view.View;
-import android.webkit.MimeTypeMap;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.Spinner;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.OnProgressListener;
-import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
-import com.squareup.picasso.Picasso;
-
-
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class AddActivity extends AppCompatActivity {
 
-    private static final int PICK_IMAGE_REQUEST = 234;
-
-    private StorageReference storageReference;
     Spinner spinVehicle;
-    EditText txtName,txtEmail,txtAge,txtCon,txtDes,txtNic,txtImage;
-    Button guideAdd,buttonChoose;
-    GuideModel guide;
-    DatabaseReference dbRef;
-    ImageView image_view;
-    TextView textViewShow;
-
-    private Uri filePath;
-
-
-    private void clearControls(){
-        txtName.setText("");
-        txtAge.setText("");
-        txtCon.setText("");
-        txtDes.setText("");
-        txtEmail.setText("");
-        txtNic.setText("");
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add);
 
+<<<<<<< HEAD
         spinVehicle = (Spinner) findViewById(R.id.spinnerVehicle);
         txtName = (EditText)findViewById(R.id.txtName);
         txtEmail = (EditText)findViewById(R.id.txtEmail);
@@ -159,6 +112,9 @@ public class AddActivity extends AppCompatActivity {
 
 
 
+=======
+        Spinner spinner = (Spinner) findViewById(R.id.spinnerVehicle);
+>>>>>>> 53d715b956432dfbfec8ef0de71371559eec7f72
 
 
 
@@ -178,88 +134,15 @@ public class AddActivity extends AppCompatActivity {
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         // attaching data adapter to spinner
-        spinVehicle.setAdapter(dataAdapter);
-
+        spinner.setAdapter(dataAdapter);
     }
 
-    private void showFileChooser() {
-        Intent intent = new Intent();
-        intent.setType("image/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
-            filePath = data.getData();
-            try {
-                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
-                image_view.setImageBitmap(bitmap);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    //Getting selected file extension
-    public String getFileExtension(Uri uri) {
-        ContentResolver cR = getContentResolver();
-        MimeTypeMap mime = MimeTypeMap.getSingleton();
-        return mime.getExtensionFromMimeType(cR.getType(uri));
+    public void add_guide(View v) {
+        Intent intent = new Intent(this, DelUpdateActivity.class);
+        startActivity(intent);
     }
 
 
-    //uploading the image
-    public void uploadFile(){
-        if (filePath != null){
-
-            final ProgressDialog progressDialog = new ProgressDialog(this);
-            progressDialog.setTitle("Uploading");
-            progressDialog.show();
-            final String value = txtNic.getText().toString();
-
-            StorageReference sRef = storageReference.child("kandy").child("ClientGuide").child(Constants.STORAGE_PATH_UPLOADS + System.currentTimeMillis() + "."+getFileExtension(filePath));
-
-            //adding file to the reference
-            sRef.putFile(filePath)
-                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-
-                            progressDialog.dismiss();
-
-                            Toast.makeText(getApplicationContext(), "Image Uploaded", Toast.LENGTH_LONG).show();
-
-                            GuideUpload upload = new GuideUpload(txtImage.getText().toString().trim()
-                                    , taskSnapshot.getMetadata().getReference().getDownloadUrl().toString());
-
-                            String uploadId = dbRef.push().getKey();
-                            dbRef.child(value).child(uploadId).setValue(upload);
-                        }
-
-                    })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception exception) {
-                            progressDialog.dismiss();
-                            Toast.makeText(getApplicationContext(),exception.getMessage(),Toast.LENGTH_LONG).show();
-
-                        }
-                    })
-                    .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
-                            double progress = (100.0 * taskSnapshot.getBytesTransferred())/taskSnapshot.getTotalByteCount();
-                            progressDialog.setMessage("Uploaded" + ((int)progress) + "%...");
-
-                        }
-                    });
-        }else {
-            //display an error if no file is selected.
-        }
-    }
 
 
 }

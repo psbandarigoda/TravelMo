@@ -122,17 +122,18 @@
         android:layout_marginTop="-48dp"
         android:background="@drawable/button_shape"
         android:onClick="@string/Cancel"
-        android:text="@string/Cancel"
+        android:text="@string/next"
         android:textColor="@color/colorText" />
 
     <Button
         android:id="@+id/next"
-        android:layout_width="match_parent"
+        android:layout_width="@dimen/nav_header_height"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="120dp"
         android:layout_marginTop="30dp"
         android:background="@drawable/button_shape"
         android:onClick="@string/next"
-        android:text="next"
+        android:text="@string/confirm"
         android:textColor="@color/colorText"
         tools:text="@string/next"/>
 

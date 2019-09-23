@@ -9,13 +9,12 @@ public class Hotel {
     private int hotelContactNumber;
     private int hotelStarRating;
     private String hotelDescription;
-    private String hotelimage;
 
 
     public Hotel() {
     }
 
-    public Hotel(String hotelId, String hotelName, String hotelAddress, String hotelEmailAddress, int hotelContactNumber, int hotelStarRating, String hotelDescription, String hotelimage) {
+    public Hotel(String hotelId, String hotelName, String hotelAddress, String hotelEmailAddress, int hotelContactNumber, int hotelStarRating, String hotelDescription) {
         this.hotelId = hotelId;
         this.hotelName = hotelName;
         this.hotelAddress = hotelAddress;
@@ -23,7 +22,6 @@ public class Hotel {
         this.hotelContactNumber = hotelContactNumber;
         this.hotelStarRating = hotelStarRating;
         this.hotelDescription = hotelDescription;
-        this.hotelimage = hotelimage;
     }
 
     public String getHotelId() {
@@ -80,13 +78,5 @@ public class Hotel {
 
     public void setHotelDescription(String hotelDescription) {
         this.hotelDescription = hotelDescription;
-    }
-
-    public String getHotelimage() {
-        return hotelimage;
-    }
-
-    public void setHotelimage(String hotelimage) {
-        this.hotelimage = hotelimage;
     }
 }

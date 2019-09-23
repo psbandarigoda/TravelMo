@@ -77,9 +77,13 @@
                     android:orientation="horizontal">
 
                     <Button
+<<<<<<< HEAD
 
                         android:id="@+id/updatehotelbtn"
 
+=======
+                        android:id="@+id/update"
+>>>>>>> 53d715b956432dfbfec8ef0de71371559eec7f72
                         android:layout_width="100dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -94,7 +98,11 @@
 
 
                     <Button
+<<<<<<< HEAD
                         android:id="@+id/deletehotelbtn"
+=======
+                        android:id="@+id/delete"
+>>>>>>> 53d715b956432dfbfec8ef0de71371559eec7f72
                         android:layout_width="100dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -216,7 +224,11 @@
                 >
 
                 <TextView
+<<<<<<< HEAD
                     android:id="@+id/hotel_nametxtView"
+=======
+                    android:id="@+id/doctor_name"
+>>>>>>> 53d715b956432dfbfec8ef0de71371559eec7f72
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/queens_kandy"
@@ -225,7 +237,11 @@
 
 
                 <TextView
+<<<<<<< HEAD
                     android:id="@+id/hotel_descTxtView"
+=======
+                    android:id="@+id/hospital_name"
+>>>>>>> 53d715b956432dfbfec8ef0de71371559eec7f72
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/desc"

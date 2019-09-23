@@ -1,33 +1,19 @@
 package com.example.travelapp;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+<<<<<<< HEAD
 import android.provider.ContactsContract;
 import android.text.TextUtils;
+=======
+>>>>>>> 53d715b956432dfbfec8ef0de71371559eec7f72
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-
-import java.util.ArrayList;
 
 public class DelUpdateActivity extends AppCompatActivity {
 
+<<<<<<< HEAD
     EditText editName,editAge,editDes,editCon,editEmail,editNic;
     DatabaseReference dbref;
     Button UpdateBtn1;
@@ -38,9 +24,15 @@ public class DelUpdateActivity extends AppCompatActivity {
 
    @Override
    protected void onCreate(Bundle savedInstanceState) {
+=======
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+>>>>>>> 53d715b956432dfbfec8ef0de71371559eec7f72
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_del_update);
+    }
 
+<<<<<<< HEAD
         this.intent = getIntent();
         editName = (EditText)findViewById(R.id.editName);
         editAge = (EditText)findViewById(R.id.editAge);
@@ -96,5 +88,16 @@ public class DelUpdateActivity extends AppCompatActivity {
         
     }
 
+=======
+    public void delete(View v) {
+        Intent intent = new Intent(this, DelUpdateActivity.class);
+        startActivity(intent);
 
+    }
+>>>>>>> 53d715b956432dfbfec8ef0de71371559eec7f72
+
+    public void update(View v) {
+        Intent intent = new Intent(this, AddActivity.class);
+        startActivity(intent);
+    }
 }

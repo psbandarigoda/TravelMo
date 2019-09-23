@@ -41,11 +41,11 @@ public class HotelBooking extends AppCompatActivity {
     DatabaseReference dbref;
     UserDetailForHotelReserv hotel;
     EditText name, email, days, room, phone;
-//     String count = "1001";
+ 
     SimpleDateFormat current = new SimpleDateFormat("ddMMyyyy");
     Date today = new Date();
     String day = current.format(today);
-
+    String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
     String key,plc,ans,x;
 
     @Override
@@ -81,12 +81,12 @@ public class HotelBooking extends AppCompatActivity {
         phone = findViewById(R.id.phone);
         days = findViewById(R.id.days);
         room = findViewById(R.id.rooms);
-//        ans = returnid();
+ 
         hotel = new UserDetailForHotelReserv();
 
         Intent place = getIntent();
         plc = place.getStringExtra("place");
-//        ans = place.getStringExtra("count");
+ 
 
 
 
@@ -121,6 +121,8 @@ public class HotelBooking extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(), "Please Enter Name", Toast.LENGTH_LONG).show();
                     else if (TextUtils.isEmpty(email.getText().toString()))
                         Toast.makeText(getApplicationContext(), "Please Enter E-Mail", Toast.LENGTH_LONG).show();
+                    else if(!(email.getText().toString()).matches(emailPattern))
+                        Toast.makeText(getApplicationContext(), "invalide E-Mail", Toast.LENGTH_LONG).show();
                     else if (TextUtils.isEmpty(room.getText().toString()))
                         Toast.makeText(getApplicationContext(), "Please Enter No Of Rooms", Toast.LENGTH_LONG).show();
                     else if (TextUtils.isEmpty(phone.getText().toString()))
@@ -133,19 +135,14 @@ public class HotelBooking extends AppCompatActivity {
                         hotel.setDays(days.getText().toString().trim());
                         hotel.setRooms(room.getText().toString().trim());
                         hotel.setPhone(Integer.parseInt(phone.getText().toString().trim()));
-//                        hotel.setCounter(ans);
+ 
 
                          x =  day + name.getText().toString().trim();
-//                        x = email.getText().toString().trim();
+ 
                         dbref.child(x).setValue(hotel);
 
                         Toast.makeText(getApplicationContext(), "Hotel Booked..", Toast.LENGTH_SHORT).show();
                         clearControls();
-
-//                        String val = count;
-//                        key = dbref.child(val).push().getKey();
-//                        Log.i("Value is ...........",key);
-//                        System.out.print(key);
 
                         Intent intent = new Intent(HotelBooking.this, HotelBookingConfirm.class);
                         intent.putExtra("userObject",x);

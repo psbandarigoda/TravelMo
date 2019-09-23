@@ -24,6 +24,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.view.Menu;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -44,10 +45,13 @@ public class GuideBooking extends AppCompatActivity {
     UserDetailForGuideReserv detailForGuideReserv;
     DatabaseReference dbRef;
     int count = 111111;
-    String plc, x;
+    String plc,x,email;
     SimpleDateFormat currentDate = new SimpleDateFormat("ddMMyyyy");
     Date todayDate = new Date();
     String thisDate = currentDate.format(todayDate);
+    String vehicleName;
+
+    String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,8 +69,7 @@ public class GuideBooking extends AppCompatActivity {
         });
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
+
         mAppBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow,
                 R.id.nav_tools, R.id.nav_share, R.id.nav_send)
@@ -79,15 +82,30 @@ public class GuideBooking extends AppCompatActivity {
         Spinner spinner = (Spinner) findViewById(R.id.spinnerVehicle);
 
         List<String> categories = new ArrayList<String>();
-        categories.add("Hiace");
-        categories.add("maco-polo");
-        categories.add("KHD");
-        categories.add("Vanatte");
-        categories.add("Dolphin");
-        categories.add("Laylend Bus");
+        categories.add("Micro");
+        categories.add("Mini");
+        categories.add("Car");
+        categories.add("Minivan");
+        categories.add("Van");
+        categories.add("VIP");
         ArrayAdapter<String> dataAdaptor = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, categories);
         dataAdaptor.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(dataAdaptor);
+
+
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+                vehicleName = adapterView.getItemAtPosition(i).toString();
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
 
         Text_Name = findViewById(R.id.editTextName);
         Text_Email = findViewById(R.id.editTextEmail);
@@ -99,13 +117,15 @@ public class GuideBooking extends AppCompatActivity {
         Intent place = getIntent();
         plc = place.getStringExtra("place");
 
+        Intent gid = getIntent();
+        email = gid.getStringExtra("email");
+
         detailForGuideReserv = new UserDetailForGuideReserv();
 
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.guide_booking, menu);
         return true;
     }
@@ -130,6 +150,8 @@ public class GuideBooking extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(), "Please Enter Name", Toast.LENGTH_LONG).show();
                     else if (TextUtils.isEmpty(Text_Email.getText().toString()))
                         Toast.makeText(getApplicationContext(), "Please Enter E-Mail", Toast.LENGTH_LONG).show();
+                    else if(!(Text_Email.getText().toString()).matches(emailPattern))
+                        Toast.makeText(getApplicationContext(), "invalide E-Mail", Toast.LENGTH_LONG).show();
                     else if (TextUtils.isEmpty(Text_Days.getText().toString()))
                         Toast.makeText(getApplicationContext(), "Please Enter No Of Days", Toast.LENGTH_LONG).show();
                     else if (TextUtils.isEmpty(Text_Phone.getText().toString()))
@@ -138,7 +160,7 @@ public class GuideBooking extends AppCompatActivity {
                         detailForGuideReserv.setName(Text_Name.getText().toString().trim());
                         detailForGuideReserv.setEmail(Text_Email.getText().toString().trim());
                         detailForGuideReserv.setDays(Text_Days.getText().toString().trim());
-//                        detailForGuideReserv.setVehicle(Text_Phone.getText().toString().trim());
+                        detailForGuideReserv.setVehicle(vehicleName.trim());
                         detailForGuideReserv.setPhoneNumber(Integer.parseInt(Text_Phone.getText().toString().trim()));
 
                         x = thisDate + Text_Name.getText().toString().trim();
@@ -147,11 +169,10 @@ public class GuideBooking extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(), "Guide Booking..", Toast.LENGTH_LONG).show();
                         clearControls();
 
-//                        count = count +1;
-
                         Intent intent = new Intent(GuideBooking.this, GuideBookingConfirm.class);
                         intent.putExtra("userObject", x);
                         intent.putExtra("place", plc);
+                        intent.putExtra("email", email);
                         startActivity(intent);
                     }
 
@@ -161,21 +182,13 @@ public class GuideBooking extends AppCompatActivity {
             }
         });
 
-//        count = count + +1;
     }
 
     private void clearControls() {
         Text_Name.setText("");
         Text_Email.setText("");
         Text_Days.setText("");
-        //room.setText("");
         Text_Phone.setText("");
     }
-
-//    public String returnid() {
-//
-//        count = String.valueOf(Integer.valueOf(count) + 1);
-//        return count;
-//    }
 
 }
